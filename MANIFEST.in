@@ -1,0 +1,2 @@
+include ScopusApyJson/DATA/*.*
+include LICENSE

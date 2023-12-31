@@ -1,0 +1,10 @@
+{	"Description": ["The field 'apikey' will contain your authentication key (obtained from http://dev.elsevier.com).",
+					"The field 'insttoken' will contain your institution token provided by Elsevier support staff.",
+					"The field 'api_uses_nb' is automatically incremented after each api request using the module api_manager of the package ScopusApyJson.",
+					"The '.gitignore' file lists 'api_scopus_config.json' as a file to be ignored",
+					"After the past of your APIKEY and your INSTTOKEN, save the 'api_scopus_config.json' in a password protected environment to be kept secure server-side.",
+					],
+    "apikey": "PAST_APIKEY_HERE",
+    "insttoken": "PAST_INSTTOKEN_HERE",
+    "api_uses_nb": 0
+}
