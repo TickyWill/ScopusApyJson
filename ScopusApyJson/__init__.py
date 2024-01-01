@@ -1,4 +1,3 @@
-__version__ = '0.00'
 __author__  = 'BiblioAnalysis team'
 __license__ = 'MIT'
 

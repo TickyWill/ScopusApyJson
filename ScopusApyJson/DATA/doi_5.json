@@ -1,0 +1,1007 @@
+{
+   "abstracts-retrieval-response":{
+      "item":{
+         "ait:process-info":{
+            "ait:status":{
+               "@state":"new",
+               "@type":"core",
+               "@stage":"S300"
+            },
+            "ait:date-delivered":{
+               "@day":"15",
+               "@timestamp":"2023-08-15T04:55:38.000038-04:00",
+               "@year":"2023",
+               "@month":"08"
+            },
+            "ait:date-sort":{
+               "@day":"27",
+               "@year":"2023",
+               "@month":"06"
+            }
+         },
+         "xocs:meta":{
+            "xocs:funding-list":{
+               "@pui-match":"primary",
+               "@has-funding-info":"1",
+               "xocs:funding":[
+                  {
+                     "xocs:funding-agency-matched-string":"European Union’s Horizon2020",
+                     "xocs:funding-id":"857793"
+                  },
+                  {
+                     "xocs:funding-agency-matched-string":"French National Research Agency",
+                     "xocs:funding-agency-acronym":"ANR",
+                     "xocs:funding-agency":"Agence Nationale de la Recherche",
+                     "xocs:funding-id":"ANR-17-CE05-0035",
+                     "xocs:funding-agency-id":"http://data.elsevier.com/vocabulary/SciValFunders/501100001665",
+                     "xocs:funding-agency-country":"http://sws.geonames.org/3017382/"
+                  }
+               ],
+               "xocs:funding-addon-generated-timestamp":"2023-08-15T15:52:03.291232Z",
+               "xocs:funding-text":"The team gratefully acknowledges the French National Research Agency for funding the Oxygen project (ANR-17-CE05-0035), and the European Union’s Horizon2020 Programme for supporting the HighLite project (Grant Agreement no. 857793).",
+               "xocs:funding-addon-type":"http://vtw.elsevier.com/data/voc/AddOnTypes/50.7/aggregated-refined"
+            }
+         },
+         "bibrecord":{
+            "head":{
+               "author-group":{
+                  "affiliation":{
+                     "country":"France",
+                     "postal-code":"F-73370",
+                     "@afid":"60104653",
+                     "@country":"fra",
+                     "city":"Le Bourget-du-Lac",
+                     "organization":[
+                        {
+                           "$":"Univ. Grenoble Alpes"
+                        },
+                        {
+                           "$":"CEA"
+                        },
+                        {
+                           "$":"LITEN"
+                        },
+                        {
+                           "$":"DTS"
+                        },
+                        {
+                           "$":"INES"
+                        }
+                     ],
+                     "affiliation-id":[
+                        {
+                           "@afid":"60104653"
+                        },
+                        {
+                           "@afid":"60007816"
+                        }
+                     ],
+                     "@affiliation-instance-id":"OB2BibRecID-950021830-71a715968c4fbda06b5e0c7fda91ab26-1",
+                     "ce:source-text":"Univ. Grenoble Alpes, CEA, LITEN, DTS, INES, F-73370, Le Bourget-du-Lac, France"
+                  },
+                  "author":[
+                     {
+                        "ce:given-name":"Thibaut",
+                        "preferred-name":{
+                           "ce:given-name":"Thibaut",
+                           "ce:initials":"T.",
+                           "ce:surname":"Desrues",
+                           "ce:indexed-name":"Desrues T."
+                        },
+                        "@author-instance-id":"OB2BibRecID-950021830-ab2e14001ebb71993c626cee8cae45ab-1",
+                        "@seq":"1",
+                        "ce:initials":"T.",
+                        "@_fa":"true",
+                        "@type":"auth",
+                        "ce:surname":"Desrues",
+                        "@auid":"24528409300",
+                        "ce:indexed-name":"Desrues T."
+                     },
+                     {
+                        "ce:given-name":"Adeline",
+                        "preferred-name":{
+                           "ce:given-name":"Adeline",
+                           "ce:initials":"A.",
+                           "ce:surname":"Lanterne",
+                           "ce:indexed-name":"Lanterne A."
+                        },
+                        "@author-instance-id":"OB2BibRecID-950021830-3f5440c6fdd090f09b1d3590fe398908-1",
+                        "@seq":"2",
+                        "ce:initials":"A.",
+                        "@_fa":"true",
+                        "@type":"auth",
+                        "ce:surname":"Lanterne",
+                        "@auid":"55604058700",
+                        "ce:indexed-name":"Lanterne A."
+                     },
+                     {
+                        "ce:given-name":"Adrien",
+                        "preferred-name":{
+                           "ce:given-name":"Adrien",
+                           "ce:initials":"A.",
+                           "ce:surname":"Danel",
+                           "ce:indexed-name":"Danel A."
+                        },
+                        "@author-instance-id":"OB2BibRecID-950021830-bfb57af7c705cb8f9b49a189bca445e0-1",
+                        "@seq":"3",
+                        "ce:initials":"A.",
+                        "@_fa":"true",
+                        "@type":"auth",
+                        "ce:surname":"Danel",
+                        "@auid":"7003386867",
+                        "ce:indexed-name":"Danel A."
+                     },
+                     {
+                        "ce:given-name":"Jordi",
+                        "preferred-name":{
+                           "ce:given-name":"Jordi",
+                           "ce:initials":"J.",
+                           "ce:surname":"Veirman",
+                           "ce:indexed-name":"Veirman J."
+                        },
+                        "@author-instance-id":"OB2BibRecID-950021830-fbbe9cd96535882f2c9bc9027e28762b-1",
+                        "@seq":"4",
+                        "ce:initials":"J.",
+                        "@_fa":"true",
+                        "@type":"auth",
+                        "ce:surname":"Veirman",
+                        "@auid":"35771762800",
+                        "ce:indexed-name":"Veirman J."
+                     },
+                     {
+                        "ce:given-name":"Sébastien",
+                        "preferred-name":{
+                           "ce:given-name":"Sébastien",
+                           "ce:initials":"S.",
+                           "ce:surname":"Dubois",
+                           "ce:indexed-name":"Dubois S."
+                        },
+                        "@author-instance-id":"OB2BibRecID-950021830-fc3f6733458415f61fc564f59b0f91b1-1",
+                        "@seq":"5",
+                        "ce:initials":"S.",
+                        "@_fa":"true",
+                        "@type":"auth",
+                        "ce:surname":"Dubois",
+                        "@auid":"7005784034",
+                        "ce:indexed-name":"Dubois S."
+                     }
+                  ]
+               },
+               "citation-title":"Double-side poly-Si/SiOxpassivating contacts solar cells: Insights into the influence of crystalline silicon wafers properties",
+               "abstracts":"© 2023 Author(s).In this work, passivated contacts screen-printed solar cells using ultra-thin (15nm) poly-crystalline silicon (poly-Si) on silicon oxide (SiOx) stacks are fabricated on different n-type monocrystalline silicon (c-Si) wafers. Such advanced passivating contacts are integrated, in combination with TCO (Transparent Conductive Oxide) layers, on both front and rear sides via a simplified fabrication process. Efficiency levels above 22.3% are obtained using this cell concept on c-Si wafers showing resistivity ranges from 0.8 to 12 ?.cm. High performances can be reached even on wafers featuring high interstitial oxygen levels and/or high metallic impurities concentrations.",
+               "correspondence":{
+                  "affiliation":{
+                     "country":"France",
+                     "postal-code":"F-73370",
+                     "@country":"fra",
+                     "city":"Le Bourget-du-Lac",
+                     "organization":[
+                        {
+                           "$":"Univ. Grenoble Alpes"
+                        },
+                        {
+                           "$":"CEA"
+                        },
+                        {
+                           "$":"LITEN"
+                        },
+                        {
+                           "$":"DTS"
+                        },
+                        {
+                           "$":"INES"
+                        }
+                     ],
+                     "@affiliation-instance-id":"OB2BibRecID-950021830-71a715968c4fbda06b5e0c7fda91ab26-1",
+                     "ce:source-text":"Univ. Grenoble Alpes, CEA, LITEN, DTS, INES, F-73370, Le Bourget-du-Lac, France"
+                  },
+                  "person":{
+                     "ce:given-name":"Thibaut",
+                     "@author-instance-id":"OB2BibRecID-950021830-0772cebdf69c5e763cde5d26ac2fc7d0-1",
+                     "ce:initials":"T.",
+                     "ce:surname":"Desrues",
+                     "ce:indexed-name":"Desrues T."
+                  }
+               },
+               "citation-info":{
+                  "citation-type":{
+                     "@code":"cp"
+                  },
+                  "citation-language":{
+                     "@language":"English",
+                     "@xml:lang":"eng"
+                  },
+                  "abstract-language":{
+                     "@language":"English",
+                     "@xml:lang":"eng"
+                  }
+               },
+               "source":{
+                  "website":{
+                     "ce:e-address":{
+                        "$":"http://scitation.aip.org/content/aip/proceeding/aipcp",
+                        "@type":"email"
+                     }
+                  },
+                  "translated-sourcetitle":{
+                     "$":"AIP Conference Proceedings",
+                     "@xml:lang":"eng"
+                  },
+                  "volisspag":{
+                     "voliss":{
+                        "@volume":"2826"
+                     }
+                  },
+                  "@type":"p",
+                  "isbn":{
+                     "@level":"volume",
+                     "$":"9780735445369",
+                     "@type":"electronic",
+                     "@length":"13"
+                  },
+                  "additional-srcinfo":{
+                     "conferenceinfo":{
+                        "confpublication":{
+                           "procpartno":"1 of 1"
+                        },
+                        "confevent":{
+                           "confname":"12th International Conference on Crystalline Silicon Photovoltaics, SiliconPV 2022",
+                           "confnumber":"12",
+                           "confseriestitle":"International Conference on Crystalline Silicon Photovoltaics",
+                           "conflocation":{
+                              "@country":"deu",
+                              "city":"Hybrid, Konstanz"
+                           },
+                           "confcode":"189931",
+                           "confdate":{
+                              "enddate":{
+                                 "@day":"30",
+                                 "@year":"2022",
+                                 "@month":"03"
+                              },
+                              "startdate":{
+                                 "@day":"28",
+                                 "@year":"2022",
+                                 "@month":"03"
+                              }
+                           }
+                        }
+                     }
+                  },
+                  "sourcetitle":"AIP Conference Proceedings",
+                  "contributor-group":[
+                     {
+                        "contributor":{
+                           "ce:given-name":"Giso",
+                           "@seq":"1",
+                           "ce:initials":"G.",
+                           "ce:degrees":"Dr.",
+                           "ce:surname":"Hahn",
+                           "@role":"edit",
+                           "ce:indexed-name":"Hahn G."
+                        }
+                     },
+                     {
+                        "contributor":{
+                           "ce:given-name":"Pierre",
+                           "@seq":"1",
+                           "ce:initials":"P.",
+                           "ce:degrees":"Dr.",
+                           "ce:surname":"Verlinden",
+                           "@role":"edit",
+                           "ce:indexed-name":"Verlinden P."
+                        }
+                     },
+                     {
+                        "contributor":{
+                           "ce:given-name":"Christophe",
+                           "@seq":"1",
+                           "ce:initials":"C.",
+                           "ce:degrees":"Prof.",
+                           "ce:surname":"Ballif",
+                           "@role":"edit",
+                           "ce:indexed-name":"Ballif C."
+                        }
+                     },
+                     {
+                        "contributor":{
+                           "ce:given-name":"Sebastien",
+                           "@seq":"1",
+                           "ce:initials":"S.",
+                           "ce:degrees":"Dr.",
+                           "ce:surname":"Dubois",
+                           "@role":"edit",
+                           "ce:indexed-name":"Dubois S."
+                        }
+                     },
+                     {
+                        "contributor":{
+                           "ce:given-name":"Stefan",
+                           "@seq":"1",
+                           "ce:initials":"S.",
+                           "ce:degrees":"Dr.",
+                           "ce:surname":"Glunz",
+                           "@role":"edit",
+                           "ce:indexed-name":"Glunz S."
+                        }
+                     },
+                     {
+                        "contributor":{
+                           "ce:given-name":"Robby",
+                           "@seq":"1",
+                           "ce:initials":"R.",
+                           "ce:degrees":"Dr.",
+                           "ce:surname":"Peibst",
+                           "@role":"edit",
+                           "ce:indexed-name":"Peibst R."
+                        }
+                     },
+                     {
+                        "contributor":{
+                           "ce:given-name":"Jef",
+                           "@seq":"1",
+                           "ce:initials":"J.",
+                           "ce:degrees":"Dr.",
+                           "ce:surname":"Poortmans",
+                           "@role":"edit",
+                           "ce:indexed-name":"Poortmans J."
+                        }
+                     },
+                     {
+                        "contributor":{
+                           "ce:given-name":"Arthur",
+                           "@seq":"1",
+                           "ce:initials":"A.",
+                           "ce:degrees":"Dr.",
+                           "ce:surname":"Weeber",
+                           "@role":"edit",
+                           "ce:indexed-name":"Weeber A."
+                        }
+                     }
+                  ],
+                  "publicationdate":{
+                     "month":"06",
+                     "year":"2023",
+                     "date-text":{
+                        "@xfab-added":"true",
+                        "$":"27 June 2023"
+                     },
+                     "day":"27"
+                  },
+                  "sourcetitle-abbrev":"AIP Conf. Proc.",
+                  "@country":"usa",
+                  "issuetitle":"SiliconPV 2022, the 12th International Conference on Crystalline Silicon Photovoltaics",
+                  "issn":[
+                     {
+                        "$":"15517616",
+                        "@type":"electronic"
+                     },
+                     {
+                        "$":"0094243X",
+                        "@type":"print"
+                     }
+                  ],
+                  "publicationyear":{
+                     "@first":"2023"
+                  },
+                  "publisher":{
+                     "publishername":"American Institute of Physics Inc."
+                  },
+                  "article-number":"110002",
+                  "@srcid":"26916"
+               },
+               "enhancement":{
+                  "classificationgroup":{
+                     "classifications":[
+                        {
+                           "@type":"ASJC",
+                           "classification":"3100"
+                        },
+                        {
+                           "@type":"SUBJABBR",
+                           "classification":"PHYS"
+                        }
+                     ]
+                  }
+               }
+            },
+            "item-info":{
+               "copyright":{
+                  "$":"Copyright 2023 Elsevier B.V., All rights reserved.",
+                  "@type":"Elsevier"
+               },
+               "dbcollection":[
+                  {
+                     "$":"SCOPUS"
+                  },
+                  {
+                     "$":"Scopusbase"
+                  }
+               ],
+               "history":{
+                  "date-created":{
+                     "@day":"14",
+                     "@timestamp":"BST 06:03:21",
+                     "@year":"2023",
+                     "@month":"08"
+                  }
+               },
+               "itemidlist":{
+                  "itemid":[
+                     {
+                        "$":"641978444",
+                        "@idtype":"PUI"
+                     },
+                     {
+                        "$":"950021830",
+                        "@idtype":"CAR-ID"
+                     },
+                     {
+                        "$":"20232997700",
+                        "@idtype":"SCOPUS"
+                     },
+                     {
+                        "$":"85167413561",
+                        "@idtype":"SCP"
+                     },
+                     {
+                        "$":"85167413561",
+                        "@idtype":"SGR"
+                     }
+                  ],
+                  "ce:doi":"10.1063/5.0140495"
+               }
+            },
+            "tail":{
+               "bibliography":{
+                  "@refcount":"8",
+                  "reference":[
+                     {
+                        "ref-fulltext":"F. Haase et al., \"Laser contact openings for local poly-Si-metal contacts enabling 26.1%-efficient POLO-IBC solar cells,\" Sol. Energy Mater. Sol.Cells, vol. 186, pp. 184-193, 2018 10.1016/j.solmat.2018.06.020",
+                        "@reference-instance-id":"OB2BibRecID-950021830-7bc5c7467ebfec25528c1967d9f11d9b-1",
+                        "@id":"1",
+                        "ref-info":{
+                           "ref-publicationyear":{
+                              "@first":"2018"
+                           },
+                           "ref-title":{
+                              "ref-titletext":"Laser contact openings for local poly-Si-metal contacts enabling 26.1%-efficient POLO-IBC solar cells"
+                           },
+                           "refd-itemidlist":{
+                              "itemid":[
+                                 {
+                                    "$":"10.1016/j.solmat.2018.06.020",
+                                    "@idtype":"DOI"
+                                 },
+                                 {
+                                    "$":"85048171181",
+                                    "@idtype":"SGR"
+                                 }
+                              ]
+                           },
+                           "ref-volisspag":{
+                              "voliss":{
+                                 "@volume":"186"
+                              },
+                              "pagerange":{
+                                 "@first":"184",
+                                 "@last":"193"
+                              }
+                           },
+                           "ref-authors":{
+                              "author":[
+                                 {
+                                    "@seq":"1",
+                                    "ce:initials":"F.",
+                                    "@_fa":"true",
+                                    "ce:surname":"Haase",
+                                    "ce:indexed-name":"Haase F."
+                                 }
+                              ],
+                              "et-al":"None"
+                           },
+                           "ref-sourcetitle":"Sol. Energy Mater. Sol.Cells"
+                        },
+                        "ce:source-text":"F. Haase et al., \"Laser contact openings for local poly-Si-metal contacts enabling 26.1%-efficient POLO-IBC solar cells,\" Sol. Energy Mater. Sol.Cells, vol. 186, pp. 184-193, 2018 10.1016/j.solmat.2018.06.020"
+                     },
+                     {
+                        "ref-fulltext":"D. Chen et al., \"24.58% total area efficiency of screen-printed, large area industrial silicon solar cells with the tunnel oxide passivated contacts (i-TOPCon) design \", Sol. Energy Mater. Sol. Cells, 206, 110258, 2020 10.1016/j.solmat.2019.110258",
+                        "@reference-instance-id":"OB2BibRecID-950021830-77db4c7c5950ece7ac0041f1b27f662f-2",
+                        "@id":"2",
+                        "ref-info":{
+                           "ref-publicationyear":{
+                              "@first":"2020"
+                           },
+                           "ref-title":{
+                              "ref-titletext":"24.58% total area efficiency of screen-printed, large area industrial silicon solar cells with the tunnel oxide passivated contacts (i-TOPCon) design"
+                           },
+                           "refd-itemidlist":{
+                              "itemid":[
+                                 {
+                                    "$":"10.1016/j.solmat.2019.110258",
+                                    "@idtype":"DOI"
+                                 },
+                                 {
+                                    "$":"110258",
+                                    "@idtype":"ARTNUM"
+                                 },
+                                 {
+                                    "$":"85074704388",
+                                    "@idtype":"SGR"
+                                 }
+                              ]
+                           },
+                           "ref-volisspag":{
+                              "voliss":{
+                                 "@volume":"206"
+                              }
+                           },
+                           "ref-authors":{
+                              "author":[
+                                 {
+                                    "@seq":"1",
+                                    "ce:initials":"D.",
+                                    "@_fa":"true",
+                                    "ce:surname":"Chen",
+                                    "ce:indexed-name":"Chen D."
+                                 }
+                              ],
+                              "et-al":"None"
+                           },
+                           "ref-sourcetitle":"Sol. Energy Mater. Sol. Cells"
+                        },
+                        "ce:source-text":"D. Chen et al., \"24.58% total area efficiency of screen-printed, large area industrial silicon solar cells with the tunnel oxide passivated contacts (i-TOPCon) design \", Sol. Energy Mater. Sol. Cells, 206, 110258, 2020 10.1016/j.solmat.2019.110258"
+                     },
+                     {
+                        "ref-fulltext":"Y. Larionova et al., \"Ultra-Thin Poly-Si Layers: Passivation Quality, Utilization of Charge Carriers Generated in the Poly-Si and Application on Screen-Printed Double-Side Contacted Polycrystalline Si on Oxide Cells \", Sol. RRL 2020, 2000177 10.1002/solr.202000177",
+                        "@reference-instance-id":"OB2BibRecID-950021830-ce84a7bee89def95ac0f5637859b382d-3",
+                        "@id":"3",
+                        "ref-info":{
+                           "ref-publicationyear":{
+                              "@first":"2020"
+                           },
+                           "ref-title":{
+                              "ref-titletext":"Ultra-Thin Poly-Si Layers: Passivation Quality, Utilization of Charge Carriers Generated in the Poly-Si and Application on Screen-Printed Double-Side Contacted Polycrystalline Si on Oxide Cells"
+                           },
+                           "refd-itemidlist":{
+                              "itemid":[
+                                 {
+                                    "$":"10.1002/solr.202000177",
+                                    "@idtype":"DOI"
+                                 },
+                                 {
+                                    "$":"2000177",
+                                    "@idtype":"ARTNUM"
+                                 },
+                                 {
+                                    "$":"85089499844",
+                                    "@idtype":"SGR"
+                                 }
+                              ]
+                           },
+                           "ref-authors":{
+                              "author":[
+                                 {
+                                    "@seq":"1",
+                                    "ce:initials":"Y.",
+                                    "@_fa":"true",
+                                    "ce:surname":"Larionova",
+                                    "ce:indexed-name":"Larionova Y."
+                                 }
+                              ],
+                              "et-al":"None"
+                           },
+                           "ref-sourcetitle":"Sol. RRL"
+                        },
+                        "ce:source-text":"Y. Larionova et al., \"Ultra-Thin Poly-Si Layers: Passivation Quality, Utilization of Charge Carriers Generated in the Poly-Si and Application on Screen-Printed Double-Side Contacted Polycrystalline Si on Oxide Cells \", Sol. RRL 2020, 2000177 10.1002/solr.202000177"
+                     },
+                     {
+                        "ref-fulltext":"G. Nogay et al., \"Crystalline Silicon Solar Cells With Coannealed Electron-and Hole-Selective SiCx Passivating Contacts \", IEEE J. Photovolt., Vol. 8, N° 6: 1478-1485, 2018 10.1109/JPHOTOV.2018.2866189",
+                        "@reference-instance-id":"OB2BibRecID-950021830-dd1ec042c61510c648f196e5dd8c2c27-4",
+                        "@id":"4",
+                        "ref-info":{
+                           "ref-publicationyear":{
+                              "@first":"2018"
+                           },
+                           "ref-title":{
+                              "ref-titletext":"Crystalline Silicon Solar Cells with Coannealed Electron- and Hole-Selective SiCx Passivating Contacts"
+                           },
+                           "refd-itemidlist":{
+                              "itemid":[
+                                 {
+                                    "$":"10.1109/JPHOTOV.2018.2866189",
+                                    "@idtype":"DOI"
+                                 },
+                                 {
+                                    "$":"85053136496",
+                                    "@idtype":"SGR"
+                                 }
+                              ]
+                           },
+                           "ref-volisspag":{
+                              "voliss":{
+                                 "@volume":"8",
+                                 "@issue":"6"
+                              },
+                              "pagerange":{
+                                 "@first":"1478",
+                                 "@last":"1485"
+                              }
+                           },
+                           "ref-authors":{
+                              "author":[
+                                 {
+                                    "@seq":"1",
+                                    "ce:initials":"G.",
+                                    "@_fa":"true",
+                                    "ce:surname":"Nogay",
+                                    "ce:indexed-name":"Nogay G."
+                                 }
+                              ],
+                              "et-al":"None"
+                           },
+                           "ref-sourcetitle":"IEEE J. Photovolt."
+                        },
+                        "ce:source-text":"G. Nogay et al., \"Crystalline Silicon Solar Cells With Coannealed Electron-and Hole-Selective SiCx Passivating Contacts \", IEEE J. Photovolt., Vol. 8, N° 6: 1478-1485, 2018 10.1109/JPHOTOV.2018.2866189"
+                     },
+                     {
+                        "ref-fulltext":"J. Veirman et al., \"Silicon wafers for industrial n-type SHJ solar cells: Bulk quality requirements, large-scale availability and guidelines for future developments \", Sol. Energy Mater. Sol. Cells, 228, 111128, 2021 10.1016/j.solmat.2021.111128",
+                        "@reference-instance-id":"OB2BibRecID-950021830-2d3b065829bbd1d33760b24295307ee8-5",
+                        "@id":"5",
+                        "ref-info":{
+                           "ref-publicationyear":{
+                              "@first":"2021"
+                           },
+                           "ref-title":{
+                              "ref-titletext":"Silicon wafers for industrial n-type SHJ solar cells: Bulk quality requirements, large-scale availability and guidelines for future developments"
+                           },
+                           "refd-itemidlist":{
+                              "itemid":[
+                                 {
+                                    "$":"10.1016/j.solmat.2021.111128",
+                                    "@idtype":"DOI"
+                                 },
+                                 {
+                                    "$":"111128",
+                                    "@idtype":"ARTNUM"
+                                 },
+                                 {
+                                    "$":"85105696156",
+                                    "@idtype":"SGR"
+                                 }
+                              ]
+                           },
+                           "ref-volisspag":{
+                              "voliss":{
+                                 "@volume":"228"
+                              }
+                           },
+                           "ref-authors":{
+                              "author":[
+                                 {
+                                    "@seq":"1",
+                                    "ce:initials":"J.",
+                                    "@_fa":"true",
+                                    "ce:surname":"Veirman",
+                                    "ce:indexed-name":"Veirman J."
+                                 }
+                              ],
+                              "et-al":"None"
+                           },
+                           "ref-sourcetitle":"Sol. Energy Mater. Sol. Cells"
+                        },
+                        "ce:source-text":"J. Veirman et al., \"Silicon wafers for industrial n-type SHJ solar cells: Bulk quality requirements, large-scale availability and guidelines for future developments \", Sol. Energy Mater. Sol. Cells, 228, 111128, 2021 10.1016/j.solmat.2021.111128"
+                     },
+                     {
+                        "ref-fulltext":"A.Y. Liu et al, \"Impurity Gettering by Diffusion-doped Polysilicon Passivating Contacts for Silicon Solar Cells \", Sol. Energy Mater. Sol. Cells, 179, 136-141, 2018 10.1016/j.solmat.2017.11.004",
+                        "@reference-instance-id":"OB2BibRecID-950021830-3180e8110d4df44d11058e9bd1fc4617-6",
+                        "@id":"6",
+                        "ref-info":{
+                           "ref-publicationyear":{
+                              "@first":"2018"
+                           },
+                           "ref-title":{
+                              "ref-titletext":"Impurity Gettering by Diffusion-doped Polysilicon Passivating Contacts for Silicon Solar Cells"
+                           },
+                           "refd-itemidlist":{
+                              "itemid":[
+                                 {
+                                    "$":"10.1016/j.solmat.2017.11.004",
+                                    "@idtype":"DOI"
+                                 },
+                                 {
+                                    "$":"85038867117",
+                                    "@idtype":"SGR"
+                                 }
+                              ]
+                           },
+                           "ref-volisspag":{
+                              "voliss":{
+                                 "@volume":"179"
+                              },
+                              "pagerange":{
+                                 "@first":"136",
+                                 "@last":"141"
+                              }
+                           },
+                           "ref-authors":{
+                              "author":[
+                                 {
+                                    "@seq":"1",
+                                    "ce:initials":"A.Y.",
+                                    "@_fa":"true",
+                                    "ce:surname":"Liu",
+                                    "ce:indexed-name":"Liu A.Y."
+                                 }
+                              ],
+                              "et-al":"None"
+                           },
+                           "ref-sourcetitle":"Sol. Energy Mater. Sol. Cells"
+                        },
+                        "ce:source-text":"A.Y. Liu et al, \"Impurity Gettering by Diffusion-doped Polysilicon Passivating Contacts for Silicon Solar Cells \", Sol. Energy Mater. Sol. Cells, 179, 136-141, 2018 10.1016/j.solmat.2017.11.004"
+                     },
+                     {
+                        "ref-fulltext":"T. Desrues et al, \"Ultra-thin Poly-Si/SiOx Passivating Contacts Integration for High Efficiency Solar Cells on n-type Cast Mono Silicon Wafers \", SiliconPV 2021, in press",
+                        "@reference-instance-id":"OB2BibRecID-950021830-b85961abed613b7e7dd7742db5d39ee0-7",
+                        "@id":"7",
+                        "ref-info":{
+                           "ref-publicationyear":{
+                              "@first":"2021"
+                           },
+                           "ref-title":{
+                              "ref-titletext":"Ultra-thin Poly-Si/SiOx Passivating Contacts Integration for High Efficiency Solar Cells on n-type Cast Mono Silicon Wafers"
+                           },
+                           "refd-itemidlist":{
+                              "itemid":{
+                                 "$":"85167440516",
+                                 "@idtype":"SGR"
+                              }
+                           },
+                           "ref-text":"in press",
+                           "ref-authors":{
+                              "author":[
+                                 {
+                                    "@seq":"1",
+                                    "ce:initials":"T.",
+                                    "@_fa":"true",
+                                    "ce:surname":"Desrues",
+                                    "ce:indexed-name":"Desrues T."
+                                 }
+                              ],
+                              "et-al":"None"
+                           },
+                           "ref-sourcetitle":"SiliconPV"
+                        },
+                        "ce:source-text":"T. Desrues et al, \"Ultra-thin Poly-Si/SiOx Passivating Contacts Integration for High Efficiency Solar Cells on n-type Cast Mono Silicon Wafers \", SiliconPV 2021, in press"
+                     },
+                     {
+                        "ref-fulltext":"T. Desrues et al. \"Poly-Si/SiOx Passivating Contacts on Both Sides: A Versatile Technology For High Efficiency Solar Cells \". 2021 IEEE 48th Photovoltaic Specialists Conference (PVSC), 2021",
+                        "@reference-instance-id":"OB2BibRecID-950021830-c234b10b6e43c50ba851b65b8b0368b5-8",
+                        "@id":"8",
+                        "ref-info":{
+                           "ref-publicationyear":{
+                              "@first":"2021"
+                           },
+                           "ref-title":{
+                              "ref-titletext":"Poly-Si/SiOx Passivating Contacts on Both Sides: A Versatile Technology for High Efficiency Solar Cells"
+                           },
+                           "refd-itemidlist":{
+                              "itemid":{
+                                 "$":"85115929847",
+                                 "@idtype":"SGR"
+                              }
+                           },
+                           "ref-authors":{
+                              "author":[
+                                 {
+                                    "@seq":"1",
+                                    "ce:initials":"T.",
+                                    "@_fa":"true",
+                                    "ce:surname":"Desrues",
+                                    "ce:indexed-name":"Desrues T."
+                                 }
+                              ],
+                              "et-al":"None"
+                           },
+                           "ref-sourcetitle":"2021 IEEE 48th Photovoltaic Specialists Conference (PVSC)"
+                        },
+                        "ce:source-text":"T. Desrues et al. \"Poly-Si/SiOx Passivating Contacts on Both Sides: A Versatile Technology For High Efficiency Solar Cells \". 2021 IEEE 48th Photovoltaic Specialists Conference (PVSC), 2021"
+                     }
+                  ]
+               }
+            }
+         }
+      },
+      "affiliation":{
+         "affiliation-city":"Saint Martin d'Heres",
+         "@id":"60104653",
+         "affilname":"Université Grenoble Alpes",
+         "@href":"https://api.elsevier.com/content/affiliation/affiliation_id/60104653",
+         "affiliation-country":"France"
+      },
+      "coredata":{
+         "srctype":"p",
+         "eid":"2-s2.0-85167413561",
+         "dc:description":"In this work, passivated contacts screen-printed solar cells using ultra-thin (15nm) poly-crystalline silicon (poly-Si) on silicon oxide (SiOx) stacks are fabricated on different n-type monocrystalline silicon (c-Si) wafers. Such advanced passivating contacts are integrated, in combination with TCO (Transparent Conductive Oxide) layers, on both front and rear sides via a simplified fabrication process. Efficiency levels above 22.3% are obtained using this cell concept on c-Si wafers showing resistivity ranges from 0.8 to 12 ?.cm. High performances can be reached even on wafers featuring high interstitial oxygen levels and/or high metallic impurities concentrations.",
+         "prism:coverDate":"2023-06-27",
+         "prism:aggregationType":"Conference Proceeding",
+         "prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85167413561",
+         "subtypeDescription":"Conference Paper",
+         "dc:creator":{
+            "author":[
+               {
+                  "ce:given-name":"Thibaut",
+                  "preferred-name":{
+                     "ce:given-name":"Thibaut",
+                     "ce:initials":"T.",
+                     "ce:surname":"Desrues",
+                     "ce:indexed-name":"Desrues T."
+                  },
+                  "@seq":"1",
+                  "ce:initials":"T.",
+                  "@_fa":"true",
+                  "affiliation":{
+                     "@id":"60104653",
+                     "@href":"https://api.elsevier.com/content/affiliation/affiliation_id/60104653"
+                  },
+                  "ce:surname":"Desrues",
+                  "@auid":"24528409300",
+                  "author-url":"https://api.elsevier.com/content/author/author_id/24528409300",
+                  "ce:indexed-name":"Desrues T."
+               }
+            ]
+         },
+         "link":[
+            {
+               "@_fa":"true",
+               "@rel":"self",
+               "@href":"https://api.elsevier.com/content/abstract/scopus_id/85167413561"
+            },
+            {
+               "@_fa":"true",
+               "@rel":"scopus",
+               "@href":"https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85167413561&origin=inward"
+            },
+            {
+               "@_fa":"true",
+               "@rel":"scopus-citedby",
+               "@href":"https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85167413561&origin=inward"
+            }
+         ],
+         "prism:isbn":"9780735445369",
+         "prism:publicationName":"AIP Conference Proceedings",
+         "source-id":"26916",
+         "citedby-count":"0",
+         "prism:volume":"2826",
+         "subtype":"cp",
+         "dc:title":"Double-side poly-Si/SiOxpassivating contacts solar cells: Insights into the influence of crystalline silicon wafers properties",
+         "openaccess":"0",
+         "openaccessFlag":"false",
+         "prism:doi":"10.1063/5.0140495",
+         "prism:issn":"15517616 0094243X",
+         "publishercopyright":"© 2023 Author(s).",
+         "article-number":"110002",
+         "dc:identifier":"SCOPUS_ID:85167413561",
+         "dc:publisher":"American Institute of Physics Inc."
+      },
+      "idxterms":"None",
+      "language":{
+         "@xml:lang":"eng"
+      },
+      "authkeywords":"None",
+      "subject-areas":{
+         "subject-area":[
+            {
+               "@_fa":"true",
+               "$":"Physics and Astronomy (all)",
+               "@code":"3100",
+               "@abbrev":"PHYS"
+            }
+         ]
+      },
+      "authors":{
+         "author":[
+            {
+               "ce:given-name":"Thibaut",
+               "preferred-name":{
+                  "ce:given-name":"Thibaut",
+                  "ce:initials":"T.",
+                  "ce:surname":"Desrues",
+                  "ce:indexed-name":"Desrues T."
+               },
+               "@seq":"1",
+               "ce:initials":"T.",
+               "@_fa":"true",
+               "affiliation":{
+                  "@id":"60104653",
+                  "@href":"https://api.elsevier.com/content/affiliation/affiliation_id/60104653"
+               },
+               "ce:surname":"Desrues",
+               "@auid":"24528409300",
+               "author-url":"https://api.elsevier.com/content/author/author_id/24528409300",
+               "ce:indexed-name":"Desrues T."
+            },
+            {
+               "ce:given-name":"Adeline",
+               "preferred-name":{
+                  "ce:given-name":"Adeline",
+                  "ce:initials":"A.",
+                  "ce:surname":"Lanterne",
+                  "ce:indexed-name":"Lanterne A."
+               },
+               "@seq":"2",
+               "ce:initials":"A.",
+               "@_fa":"true",
+               "affiliation":{
+                  "@id":"60104653",
+                  "@href":"https://api.elsevier.com/content/affiliation/affiliation_id/60104653"
+               },
+               "ce:surname":"Lanterne",
+               "@auid":"55604058700",
+               "author-url":"https://api.elsevier.com/content/author/author_id/55604058700",
+               "ce:indexed-name":"Lanterne A."
+            },
+            {
+               "ce:given-name":"Adrien",
+               "preferred-name":{
+                  "ce:given-name":"Adrien",
+                  "ce:initials":"A.",
+                  "ce:surname":"Danel",
+                  "ce:indexed-name":"Danel A."
+               },
+               "@seq":"3",
+               "ce:initials":"A.",
+               "@_fa":"true",
+               "affiliation":{
+                  "@id":"60104653",
+                  "@href":"https://api.elsevier.com/content/affiliation/affiliation_id/60104653"
+               },
+               "ce:surname":"Danel",
+               "@auid":"7003386867",
+               "author-url":"https://api.elsevier.com/content/author/author_id/7003386867",
+               "ce:indexed-name":"Danel A."
+            },
+            {
+               "ce:given-name":"Jordi",
+               "preferred-name":{
+                  "ce:given-name":"Jordi",
+                  "ce:initials":"J.",
+                  "ce:surname":"Veirman",
+                  "ce:indexed-name":"Veirman J."
+               },
+               "@seq":"4",
+               "ce:initials":"J.",
+               "@_fa":"true",
+               "affiliation":{
+                  "@id":"60104653",
+                  "@href":"https://api.elsevier.com/content/affiliation/affiliation_id/60104653"
+               },
+               "ce:surname":"Veirman",
+               "@auid":"35771762800",
+               "author-url":"https://api.elsevier.com/content/author/author_id/35771762800",
+               "ce:indexed-name":"Veirman J."
+            },
+            {
+               "ce:given-name":"Sébastien",
+               "preferred-name":{
+                  "ce:given-name":"Sébastien",
+                  "ce:initials":"S.",
+                  "ce:surname":"Dubois",
+                  "ce:indexed-name":"Dubois S."
+               },
+               "@seq":"5",
+               "ce:initials":"S.",
+               "@_fa":"true",
+               "affiliation":{
+                  "@id":"60104653",
+                  "@href":"https://api.elsevier.com/content/affiliation/affiliation_id/60104653"
+               },
+               "ce:surname":"Dubois",
+               "@auid":"7005784034",
+               "author-url":"https://api.elsevier.com/content/author/author_id/7005784034",
+               "ce:indexed-name":"Dubois S."
+            }
+         ]
+      }
+   }
+}

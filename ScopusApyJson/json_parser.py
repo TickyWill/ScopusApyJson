@@ -128,25 +128,27 @@ def _parse_ordered_authors(json_data, article_dic):
     if not isinstance(auths_group, list) : auths_group = [auths_group]
         
     for auths in auths_group:
-        auth_name       = get_json_key_value(auths, 'ce:indexed-name')
-        auth_surname    = get_json_key_value(auths, 'ce:surname')
-        auth_given_name = get_json_key_value(auths, 'ce:given-name')
-        auth_id         = get_json_key_value(auths, '@auid')
-        
+        auth_id             = get_json_key_value(auths, '@auid')
+        auth_preferred_name = get_json_key_value(auths, 'preferred-name')
+        auth_name           = get_json_key_value(auth_preferred_name, 'ce:indexed-name')
+        auth_surname        = get_json_key_value(auth_preferred_name, 'ce:surname')
+        auth_given_name     = get_json_key_value(auth_preferred_name, 'ce:given-name')
+                
         authors.append(auth_name)
         authors_ids.append(auth_id)
         authors_full_names.append(f'{auth_surname}, {auth_given_name} ({auth_id})')
 
-    article_dic['Authors']                   = '; '.join(authors)
-    article_dic['Author(s) ID']              = '; '.join(authors_ids)
-    article_dic['Author full names']         = '; '.join(authors_full_names)
-
+    article_dic['Authors']           = '; '.join(authors)
+    article_dic['Author(s) ID']      = '; '.join(authors_ids)
+    article_dic['Author full names'] = '; '.join(authors_full_names)
+    
     
 def _parse_authors_affiliations(json_data, article_dic):
     '''Parse the field "author-group" under the leaf "abstracts-retrieval-response/item/bibrecord/head".
     This field is a dict if there is only one author, otherwise it is a list of dict .
     '''
-    # ? imports
+    
+    # Standard library imports
     from collections import defaultdict
     
     # Local library imports
@@ -162,35 +164,35 @@ def _parse_authors_affiliations(json_data, article_dic):
     if not isinstance(affiliations_group, list) : affiliations_group = [affiliations_group]
         
     for affiliation_dict in affiliations_group:
-        
         affiliation = get_json_key_value(affiliation_dict, 'affiliation')
-        
+    
         # Building affiliation full address
         organizations_list = get_json_key_value(affiliation, 'organization')
         if not isinstance(organizations_list, list) : organizations_list = [organizations_list]
         address_items_list = []
         for organization_dict in organizations_list:
-            address_items_list.append(get_json_key_value(organization_dict, '$'))       
+            address_items_list.append(get_json_key_value(organization_dict, '$'))        
         address_items_list = check_true_to_append(affiliation, 'address-part', address_items_list)
         address_items_list = check_true_to_append(affiliation, 'city', address_items_list)
         address_items_list = check_true_to_append(affiliation, 'postal-code', address_items_list)
         address_items_list = check_true_to_append(affiliation, 'country', address_items_list)
         affiliation_address = ', '.join(address_items_list)
-        
+      
         # Appending "affiliation_address" to "affiliations_list"
         affiliations_list.append(affiliation_address)
         
         # Appending "affiliation_address" to "authors_with_affiliations_dict" for each author of the "affiliation_authors_list"
-        affiliation_authors_list = get_json_key_value(organization_dict, 'author')
+        affiliation_authors_list = get_json_key_value(affiliation_dict, 'author')
         if not isinstance(affiliation_authors_list, list) : affiliation_authors_list = [affiliation_authors_list]
         for author in affiliation_authors_list:
-            author_name = get_json_key_value(author, 'ce:indexed-name')
+            author_preferred_name = get_json_key_value(author, 'preferred-name')
+            author_name           = get_json_key_value(author_preferred_name, 'ce:indexed-name')
             authors_with_affiliations_dict[author_name].append(affiliation_address)
-    
+            
     # Ordering the "authors_with_affiliations_list" in the order of the "ordered_authors"
     for author in ordered_authors:
         author_affiliations_list = authors_with_affiliations_dict[author]
-        authors_with_affiliations_list.append(f"{author}, {','.join(author_affiliations_list)}")        
+        authors_with_affiliations_list.append(f"{author}, {', '.join(author_affiliations_list)}")        
 
     article_dic['Authors with affiliations'] = '; '.join(authors_with_affiliations_list)
     article_dic['Affiliations']              = '; '.join(affiliations_list)

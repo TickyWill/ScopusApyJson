@@ -34,17 +34,20 @@ def _get_json_from_api(api_doi, api_config_dict):
 
     # Setting Elsevier API
     els_api = _set_els_doi_api(MyScopusKey, MyInstKey, api_doi)
+    
+    # Initializing parameters
+    response_dict = None
 
     # Get the request response
     try:
-        response = requests.get(els_api, timeout = 5)   
+        response = requests.get(els_api, timeout = 10)   
     except Timeout:
         print('The request timed out')
     else:
         if response == False: # response.status_code <200 or > 400
             print('Resource not found')
         else:
-            print('Resquest successful')
+            print(f'Resquest successful for {api_doi}')
             if response.status_code == 204:
                 print('No content')
             else:            
