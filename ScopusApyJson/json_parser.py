@@ -295,9 +295,13 @@ def _parse_references(json_data, article_dic):
             ref_text_list.append(ref_text)
         article_dic['References'] = '; '.join(ref_text_list)
         
-    except:
-        article_dic['References'] = '; '.join([get_json_key_value(ref, 'ref-fulltext') 
-                                               for ref in references_list])
+    except Exception as e:
+        if "None object" in e:
+            article_dic['References'] = '; '.join([get_json_key_value(ref, 'ref-fulltext') 
+                                                   for ref in references_list])
+        else:
+            print(f"Error in _parse_references function: ", e)
+            
 
         
 def _parse_index_keywords(json_data, article_dic):
