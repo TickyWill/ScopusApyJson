@@ -241,67 +241,64 @@ def _parse_references(json_data, article_dic):
     from ScopusApyJson.json_utils import get_json_key_value
     
     ref_text_list = []
-    bibliography     = get_json_key_value(json_data, 'bibliography')
+    tail             = get_json_key_value(json_data, 'tail')
+    bibliography     = get_json_key_value(tail, 'bibliography')
     references_list  = get_json_key_value(bibliography, 'reference')
     if not isinstance(references_list, list): references_list = [references_list]
-    try:
-        for ref_dict in references_list:
-            ref_item_list = []
 
-            ref_authors = get_json_key_value(ref_dict, 'ref-authors')
-            author_dict = get_json_key_value(ref_authors, 'author')
-            et_al       = ""
-            if isinstance(author_dict, list): 
-                author_dict = author_dict[0]
-                et_al       = " et al."
-            author_name  = get_json_key_value(author_dict, 'ce:indexed-name')
-            authors      = author_name + et_al                
+    for ref_dict in references_list:
+        ref_item_list = []
+        
+        ref_info    = get_json_key_value(ref_dict, 'ref-info')
+        ref_authors = get_json_key_value(ref_info, 'ref-authors')
+        author_dict = get_json_key_value(ref_authors, 'author')
+        et_al       = ""
+        if isinstance(author_dict, list): 
+            author_dict = author_dict[0]
+            et_al       = " et al."
+        author_name = get_json_key_value(author_dict, 'ce:indexed-name')
+        if check_not_none(author_name):
+            authors     = author_name + et_al                
             ref_item_list.append(authors)
 
-            ref_title = get_json_key_value(ref_dict, 'ref-title')
-            title     = get_json_key_value(ref_title, 'ref-titletext')
-            ref_item_list.append(title)
+        ref_title = get_json_key_value(ref_info, 'ref-title')
+        title     = get_json_key_value(ref_title, 'ref-titletext')
+        if check_not_none(title): ref_item_list.append(title)
 
-            source = get_json_key_value(ref_dict, 'ref-sourcetitle')
-            ref_item_list.append(source)
+        source = get_json_key_value(ref_info, 'ref-sourcetitle')
+        if check_not_none(source): ref_item_list.append(source)
 
-            ref_volisspag = get_json_key_value(ref_dict, 'ref-volisspag')
-            voliss = get_json_key_value(ref_volisspag, 'voliss')
-            volume = get_json_key_value(voliss, '@volume')    
-            if check_not_none(volume): ref_item_list.append(volume)
+        ref_volisspag = get_json_key_value(ref_info, 'ref-volisspag')
+        voliss        = get_json_key_value(ref_volisspag, 'voliss')
+        volume        = get_json_key_value(voliss, '@volume')
+        issue         = get_json_key_value(voliss, '@issue')
+        pagerange     = get_json_key_value(ref_volisspag, 'pagerange')
+        page_first    = get_json_key_value(pagerange, '@first')
+        page_last     = get_json_key_value(pagerange, '@last')
+        if check_not_none(volume): ref_item_list.append(volume)        
+        if check_not_none(issue): ref_item_list.append(issue)
+        if check_not_none(page_first) and check_not_none(page_last): 
+            ref_item_list.append('pp. ' + page_first + '-' + page_last)
 
-            issue = get_json_key_value(voliss, '@issue')
-            if check_not_none(issue): ref_item_list.append(issue)
-            
-            pagerange  = get_json_key_value(ref_volisspag, 'pagerange')
-            page_first = get_json_key_value(pagerange, '@first')
-            page_last  = get_json_key_value(pagerange, '@last')
-            if check_not_none(page_first) and check_not_none(page_last): 
-                ref_item_list.append('pp. ' + page_first + '-' + page_last)
+        ref_publicationyear = get_json_key_value(ref_info, 'ref-publicationyear')
+        year                = get_json_key_value(ref_publicationyear, '@first')
+        if check_not_none(year): ref_item_list.append("(" + year + ")")
 
-            ref_publicationyear = get_json_key_value(ref_dict, 'ref-publicationyear')
-            year = get_json_key_value(ref_publicationyear, '@first')
-            ref_item_list.append("(" + year + ")")
-            
-            refd_itemidlist = get_json_key_value(ref_dict, 'refd-itemidlist')
-            itemid_list     = get_json_key_value(refd_itemidlist, 'itemid')
-            if not isinstance(itemid_list, list): itemid_list = [itemid_list]
-            for itemid in itemid_list:
-                itemid_type = get_json_key_value(itemid, '@idtype')
-                if itemid_type == "DOI": doi = get_json_key_value(itemid, '$')
-            ref_item_list.append(doi)
-            
-            ref_text = ', '.join(ref_item_list)
-            ref_text_list.append(ref_text)
-        article_dic['References'] = '; '.join(ref_text_list)
+        refd_itemidlist = get_json_key_value(ref_info, 'refd-itemidlist')
+        itemid_list     = get_json_key_value(refd_itemidlist, 'itemid')
+        if not isinstance(itemid_list, list): itemid_list = [itemid_list]
+        doi = None
+        for itemid_dict in itemid_list:
+            itemid_type = get_json_key_value(itemid_dict, '@idtype')            
+            if itemid_type == "DOI": doi = get_json_key_value(itemid_dict, '$')
+        if check_not_none(doi): ref_item_list.append(doi)
         
-    except Exception as e:
-        if "None object" in e:
-            article_dic['References'] = '; '.join([get_json_key_value(ref, 'ref-fulltext') 
-                                                   for ref in references_list])
-        else:
-            print(f"Error in _parse_references function: ", e)
-            
+        ref_text = get_json_key_value(ref_info, 'ref-text')
+        if check_not_none(ref_text): ref_item_list.append(ref_text)
+
+        full_ref = ', '.join(ref_item_list)
+        ref_text_list.append(full_ref)
+    article_dic['References'] = '; '.join(ref_text_list)            
 
         
 def _parse_index_keywords(json_data, article_dic):
