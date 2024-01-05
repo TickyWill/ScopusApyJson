@@ -1,6 +1,7 @@
 __all__ = ['api_manager_demo',
            'build_scopus_df_from_api',
            'build_scopus_df_from_json_files',
+           'get_doi_json_data_from_file',
            'json_parser_demo',
           ]
 
@@ -37,7 +38,7 @@ def _export_to_check(df, data_path, filename_base, results_path):
     dh.to_excel(file_out, index = False)
     
 
-def _get_doi_json_data_from_file(file_doi, data_path):
+def get_doi_json_data_from_file(file_doi, data_path):
     """
     """
     # Standard library imports
@@ -63,7 +64,7 @@ def build_scopus_df_from_json_files(doi_file_list, data_path, results_path, chec
     if not isinstance(doi_file_list, list): doi_file_list = [doi_file_list]
     scopus_df_list = []
     for idx, doi_file in enumerate(doi_file_list):
-        file_json_data = _get_doi_json_data_from_file(doi_file, data_path)
+        file_json_data = get_doi_json_data_from_file(doi_file, data_path)
         scopus_df      = parse_json_data_to_scopus_df(file_json_data)
         if check: 
             _export_to_check(scopus_df, data_path, doi_file, results_path)
@@ -170,7 +171,7 @@ def json_parser_demo(data_path = None, api_results_path = None, check_status = F
     # Globals imports
     from ScopusApyJson.GLOBALS import API_RESULTS_PATH
     
-    #Setting results paths
+    # Setting results paths
     if not api_results_path: api_results_path = API_RESULTS_PATH   
     
     # Setting the DATA path where demo files are stored
