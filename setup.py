@@ -30,6 +30,12 @@ setup(name='ScopusApyJson',
         ],
       keywords = 'Metadata parsing, Scopus parsing, API management',
       install_requires = install_requires,
+      entry_points={
+                    'console_scripts': [
+                    'cli_doi = ScopusApyJson.cli_doi:cli_doi',
+                    'cli_json = ScopusApyJson.cli_json:cli_json'
+                                       ],
+                    },
       author= 'BiblioAbnalysis team',
       author_email= 'francois.bertin7@wanadoo.fr, amal.chabli@orange.fr',
       url= 'https://github.com/TickyWill/ScopusApyJson',
