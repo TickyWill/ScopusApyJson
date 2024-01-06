@@ -1,2 +1,3 @@
 include ScopusApyJson/DATA/*.*
+include ScopusApyJson/DATA/scopus_api_keys/api_scopus_config.json
 include LICENSE

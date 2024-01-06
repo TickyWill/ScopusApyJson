@@ -1,8 +1,84 @@
+"""
+config.py docs
+A custom config json is stored in the two  following directories:
+      ~/AppData/Roaming/api_scopus_config.json  and  contains user api scopus keys
+      .ScopusApyJson/api_scopus_config.json   contain the default setting 
+If the user's api_scopus_config.json configuration file exits it  will be used. Otherwise a user's configuration file Pvcharacterization.yaml 
+will be created in the user's ~/AppData/Roaming.
+The modification of the config variables will be stored in the Pvcharacterization.yaml stor in the user's WORRKING_DIR folder.
+
+"""
+
 __all__ = ['API_CONFIG_PATH',
            'API_RESULTS_PATH',
+           'GLOBAL_KEYS',
            'PARSED_SCOPUS_COLUMNS_NAMES',
            'SELECTED_SCOPUS_COLUMNS_NAMES',
           ]
+
+
+def get_config_dir():
+
+    """
+    Returns a parent directory path
+    where persistent application data can be stored.
+
+    # linux: ~/.local/share
+    # macOS: ~/Library/Application Support
+    # windows: C:/Users/<USER>/AppData/Roaming
+    adapted from : https://stackoverflow.com/questions/19078969/python-getting-appdata-folder-in-a-cross-platform-way
+    """
+    # Standard library imports
+    import sys
+    from pathlib import Path
+    
+    home = Path.home()
+
+    if sys.platform == 'win32':
+        return home / Path('AppData/Roaming')
+    elif sys.platform == 'linux':
+        return home / Path('.local/share')
+    elif sys.platform == 'darwin':
+        return home / Path('Library/Application Support')
+
+
+def _config_ScopusApyJson_key():
+
+    # Standard library imports
+    import os.path
+    from pathlib import Path
+
+    # 3rd party imports
+    import json
+    
+    # Reads the default api_scopus_config.json config file
+    path_config_file = Path(__file__).parent / Path('DATA/scopus_api_keys/api_scopus_config.json')
+    date1 = os.path.getmtime(path_config_file)
+    with open(path_config_file) as file:
+        json_dict = json.load(file)
+        
+    # Overwrite if a local api_scopus_config.json config file otherwise create it.
+         
+    local_config_path = get_config_dir() / Path(r'ScopusApyJson/api_scopus_config.json')
+    
+    if os.path.exists(local_config_path):
+        date2 = os.path.getmtime(local_config_path)
+        if date2>date1:
+            with open(local_config_path) as file:
+                json_dict = json.load(file)
+        else:
+            with open(local_config_path, 'w') as file:
+                json.dump(json_dict, file, indent=4)
+    else:
+        if not os.path.exists(get_config_dir() / Path('ScopusApyJson')):
+            os.makedirs(get_config_dir() / Path('ScopusApyJson'))
+        with open(local_config_path, 'w') as file:
+            json.dump(json_dict, file, indent=4)
+       
+    return json_dict
+
+GLOBAL_KEYS = _config_ScopusApyJson_key()
+
 
 # Paths to be set by user 
     # API_CONFIG_PATH example for windows: API_CONFIG_PATH = r"C:\Users\<my_user_id>\<my_config_folder>\api_scopus_config.json")
