@@ -11,7 +11,7 @@ The modification of the config variables will be stored in the Pvcharacterizatio
 
 __all__ = ['API_CONFIG_PATH',
            'API_RESULTS_PATH',
-           'GLOBAL_KEYS',
+           'API_KEYS_DICT',
            'PARSED_SCOPUS_COLUMNS_NAMES',
            'SELECTED_SCOPUS_COLUMNS_NAMES',
           ]
@@ -41,43 +41,65 @@ def get_config_dir():
     elif sys.platform == 'darwin':
         return home / Path('Library/Application Support')
 
+def _check_api_keys(json_config_dict):
+    status = True   
+    dict_apikey    = json_config_dict["apikey"]
+    dict_insttoken = json_config_dict["insttoken"]
+    if (dict_apikey ==  "PAST_APIKEY_HERE") or (dict_insttoken == "PAST_INSTTOKEN_HERE"):
+        status = False
+    return status        
 
 def _config_ScopusApyJson_key():
 
     # Standard library imports
+    import json
     import os.path
     from pathlib import Path
-
-    # 3rd party imports
-    import json
     
     # Reads the default api_scopus_config.json config file
-    path_config_file = Path(__file__).parent / Path('DATA/scopus_api_keys/api_scopus_config.json')
-    date1 = os.path.getmtime(path_config_file)
-    with open(path_config_file) as file:
-        json_dict = json.load(file)
+    pck_config_path = Path(__file__).parent / Path('DATA/scopus_api_keys/api_scopus_config.json')
+    pck_config_date = os.path.getmtime(pck_config_path)
+    with open(pck_config_path) as file:
+        json_config_dict = json.load(file)
         
-    # Overwrite if a local api_scopus_config.json config file otherwise create it.
-         
-    local_config_path = get_config_dir() / Path(r'ScopusApyJson/api_scopus_config.json')
+    # Sets the json_config_dict according to the status of the local config file        
+    local_config_dir_path = get_config_dir() / Path('ScopusApyJson')
+    local_config_file_path = local_config_dir_path  / Path('api_scopus_config.json')
     
-    if os.path.exists(local_config_path):
-        date2 = os.path.getmtime(local_config_path)
-        if date2>date1:
-            with open(local_config_path) as file:
-                json_dict = json.load(file)
+    if os.path.exists(local_config_file_path):
+        # Local api_scopus_config.json config file exists
+        local_config_date = os.path.getmtime(local_config_file_path)
+        if local_config_date > pck_config_date:
+            # Local config file is more recent than package one
+            # thus json_config_dict is defined by the local config file
+            with open(local_config_file_path) as file:
+                json_config_dict = json.load(file)
         else:
-            with open(local_config_path, 'w') as file:
-                json.dump(json_dict, file, indent=4)
+            # Local config file is less recent than package one
+            # thus package config file overwrite the local config file 
+            # and json_config_dict is kept at default values
+            with open(local_config_file_path, 'w') as file:
+                json.dump(json_config_dict, file, indent=4)
     else:
+        # Local api_scopus_config.json config file does not exist
+        # thus package config file is used to create a local config file
+        # to be filled by the user
+        # and json_config_dict is kept at default values
         if not os.path.exists(get_config_dir() / Path('ScopusApyJson')):
             os.makedirs(get_config_dir() / Path('ScopusApyJson'))
-        with open(local_config_path, 'w') as file:
-            json.dump(json_dict, file, indent=4)
-       
-    return json_dict
+        with open(local_config_file_path, 'w') as file:
+            json.dump(json_config_dict, file, indent=4)
+    
+    api_keys_status = _check_api_keys(json_config_dict)
+    if not  api_keys_status:
+        message  = f"Api keys not yet defined."
+        message += f"Please fill the config file:"
+        message += f"{local_config_file_path}"
+        raise ValueError(message)       
+    
+    return json_config_dict
 
-GLOBAL_KEYS = _config_ScopusApyJson_key()
+API_KEYS_DICT = _config_ScopusApyJson_key()
 
 
 # Paths to be set by user 
