@@ -59,18 +59,6 @@ def _get_json_from_api(api_doi, api_config_dict):
     return response_dict
 
 
-def _get_api_config_json(api_config_path):
-    # Standard library imports
-    import json as json
-    
-    # Loading configuration
-    api_config_file = open(api_config_path)
-    api_config_dict = json.load(api_config_file)
-    api_config_file.close() 
-
-    return api_config_dict
-
-
 def _update_api_config_json(api_config_path, api_config_dict):
     # Standard library imports
     import json as json
@@ -86,13 +74,14 @@ def get_doi_json_data_from_api(api_doi, api_config_path):
     # 3rd party imports
     import pandas as pd
     
-    # Loading configuration
-    api_config_dict = _get_api_config_json(api_config_path)
+    # Globals imports
+    from ScopusApyJson.GLOBALS import API_CONFIG_DICT
+    from ScopusApyJson.GLOBALS import API_CONFIG_PATH
     
     # Getting api json data
-    api_json_data = _get_json_from_api(api_doi, api_config_dict)
+    api_json_data = _get_json_from_api(api_doi, API_CONFIG_DICT)
     
     # Updatting api config json with number of requests
-    _update_api_config_json(api_config_path, api_config_dict)
+    _update_api_config_json(API_CONFIG_PATH, API_CONFIG_DICT)
     
     return api_json_data

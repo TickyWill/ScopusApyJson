@@ -52,7 +52,7 @@ def get_doi_json_data_from_file(file_doi, data_path):
     return json_data
 
 
-def build_scopus_df_from_json_files(doi_file_list, data_path, results_path, check = False):
+def build_scopus_df_from_json_files(doi_file_list, data_path, results_path = None):
     """
     """
     # 3rd party imports
@@ -66,7 +66,7 @@ def build_scopus_df_from_json_files(doi_file_list, data_path, results_path, chec
     for idx, doi_file in enumerate(doi_file_list):
         file_json_data = get_doi_json_data_from_file(doi_file, data_path)
         scopus_df      = parse_json_data_to_scopus_df(file_json_data)
-        if check: 
+        if results_path is not None: 
             _export_to_check(scopus_df, data_path, doi_file, results_path)
         scopus_df_list.append(scopus_df)
     files_scopus_df = pd.concat(scopus_df_list, axis = 0)
