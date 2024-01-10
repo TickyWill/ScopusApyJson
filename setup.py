@@ -32,8 +32,8 @@ setup(name='ScopusApyJson',
       install_requires = install_requires,
       entry_points={
                     'console_scripts': [
-                    'cli_doi = ScopusApyJson.cli_doi:cli_doi',
-                    'cli_json = ScopusApyJson.cli_json:cli_json'
+                    'cli_doi = ScopusApyJson.CLI.cli:cli_doi',
+                    'cli_json = ScopusApyJson.CLI.cli:cli_json'
                                        ],
                     },
       author= 'BiblioAbnalysis team',
