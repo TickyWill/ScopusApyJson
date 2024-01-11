@@ -1,7 +1,7 @@
 __all__ = ['check_not_none',
            'check_true_to_append',
            'check_true_to_set',
-           'get_json_key_value'
+           'get_json_key_value',
           ]
 
 def get_json_key_value(dic, key):

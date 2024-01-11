@@ -11,11 +11,12 @@ The modification of the config variables will be stored in the Pvcharacterizatio
 
 __all__ = ['API_CONFIG_DICT',
            'API_CONFIG_PATH',
-           'API_RESULTS_PATH',
+           'ELS_LINK',
            'PARSED_SCOPUS_COLUMNS_NAMES',
            'SELECTED_SCOPUS_COLUMNS_NAMES',
           ]
 
+ELS_LINK = "https://api.elsevier.com/content/abstract/" 
 
 def get_config_dir():
 
@@ -111,10 +112,6 @@ PARSED_SCOPUS_COLUMNS_NAMES   = list(scopus_column_names_dict.keys())
 
 SELECTED_SCOPUS_COLUMNS_NAMES = [k for k,v in scopus_column_names_dict.items() if v] 
 
-# To be removed
-# API_RESULTS_PATH example for windows: API_RESULTS_PATH = r"C:\Users\<my_user_id>\<my_api_scopus_folder>")
-API_RESULTS_PATH = "path/to/results_directory"
-#API_RESULTS_PATH = r"C:\Users\AC265100\Documents\BiblioMeter_App\Scopus_api_test"
 
 # List of all columns that can be extracted from the results of a query on the scopus website
 # This list is only informative to user 

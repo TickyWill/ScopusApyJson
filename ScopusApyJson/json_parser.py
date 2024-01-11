@@ -339,6 +339,7 @@ def _parse_coredata(json_data, article_dic):
     from ScopusApyJson.json_utils import get_json_key_value
     
     coredata_dict                = get_json_key_value(json_data, 'coredata')
+    article_dic['Title']         = get_json_key_value(coredata_dict, 'dc:title')
     article_dic['DOI']           = get_json_key_value(coredata_dict, 'prism:doi')
     article_dic['EID']           = get_json_key_value(coredata_dict, 'eid')
     article_dic['Document Type'] = get_json_key_value(coredata_dict, 'subtypeDescription')

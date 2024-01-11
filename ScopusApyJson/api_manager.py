@@ -3,9 +3,10 @@ __all__ = ['get_doi_json_data_from_api',]
 def _set_els_doi_api(MyScopusKey, MyInstKey, doi):
     """
     """ 
-    # Setting the query
-    ELS_LINK = "https://api.elsevier.com/content/abstract/"
+    # Globals imports
+    from ScopusApyJson.GLOBALS import ELS_LINK
     
+    # Setting the query  
     query_header = ELS_LINK
     query = doi + '?'
 
@@ -19,21 +20,23 @@ def _set_els_doi_api(MyScopusKey, MyInstKey, doi):
     return els_api
 
 
-def _get_json_from_api(api_doi, api_config_dict):
+def _get_json_from_api(doi, API_CONFIG_DICT):
     '''
     '''
     # Standard library imports
-    import json as json
+    import json    
+    
+    # 3rd party library imports
     import requests
     from requests.exceptions import Timeout
     
     # Setting client authentication keys
-    MyScopusKey = api_config_dict["apikey"]
-    MyInstKey   = api_config_dict["insttoken"]
-    api_uses_nb = api_config_dict['api_uses_nb']
+    MyScopusKey = API_CONFIG_DICT["apikey"]
+    MyInstKey   = API_CONFIG_DICT["insttoken"]
+    api_uses_nb = API_CONFIG_DICT['api_uses_nb']
 
     # Setting Elsevier API
-    els_api = _set_els_doi_api(MyScopusKey, MyInstKey, api_doi)
+    els_api = _set_els_doi_api(MyScopusKey, MyInstKey, doi)
     
     # Initializing parameters
     response_dict = None
@@ -47,41 +50,36 @@ def _get_json_from_api(api_doi, api_config_dict):
         if response == False: # response.status_code <200 or > 400
             print('Resource not found')
         else:
-            print(f'Resquest successful for {api_doi}')
+            print(f'Resquest successful for DOI {doi}')
             if response.status_code == 204:
                 print('No content')
             else:            
                 response_dict = response.json()
                 
         # Updating api_uses_nb in config_dict
-        api_config_dict["api_uses_nb"] = api_uses_nb + 1
+        API_CONFIG_DICT["api_uses_nb"] = api_uses_nb + 1
     
     return response_dict
 
 
-def _update_api_config_json(api_config_path, api_config_dict):
+def _update_api_config_json(API_CONFIG_PATH, API_CONFIG_DICT):
     # Standard library imports
-    import json as json
+    import json
     
-    with open(api_config_path, 'w') as f:
-        json.dump(api_config_dict, f, indent = 4)
+    with open(API_CONFIG_PATH, 'w') as f:
+        json.dump(API_CONFIG_DICT, f, indent = 4)
         
         
-def get_doi_json_data_from_api(api_doi, api_config_path):
-    # Standard library imports
-    import json as json
-    
-    # 3rd party imports
-    import pandas as pd
+def get_doi_json_data_from_api(doi):
     
     # Globals imports
     from ScopusApyJson.GLOBALS import API_CONFIG_DICT
     from ScopusApyJson.GLOBALS import API_CONFIG_PATH
     
     # Getting api json data
-    api_json_data = _get_json_from_api(api_doi, API_CONFIG_DICT)
+    doi_json_data = _get_json_from_api(doi, API_CONFIG_DICT)
     
     # Updatting api config json with number of requests
     _update_api_config_json(API_CONFIG_PATH, API_CONFIG_DICT)
     
-    return api_json_data
+    return doi_json_data
