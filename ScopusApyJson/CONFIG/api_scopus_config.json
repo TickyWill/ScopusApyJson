@@ -6,7 +6,7 @@
         "The '.gitignore' file lists 'api_scopus_config.json' as a file to be ignored.",
         "After the past of your APIKEY and your INSTTOKEN, save the 'api_scopus_config.json' in a password protected environment to be kept secure server-side."
     ],
-    "apikey": "toto",
-    "insttoken": "tata",
+    "apikey": "PAST_APIKEY_HERE",
+    "insttoken": "PAST_INSTTOKEN_HERE",
     "api_uses_nb": 0
 }

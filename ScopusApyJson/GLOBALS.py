@@ -106,11 +106,11 @@ def _config_ScopusApyJson_key(json_file_name):
 API_CONFIG_DICT, API_CONFIG_PATH = _config_ScopusApyJson_key('api_scopus_config.json')
 _check_api_keys(API_CONFIG_DICT)
 
-scopus_column_names_dict, _   = _config_ScopusApyJson_key('scopus_col_names.json')
+scopus_column_names_dict, _      = _config_ScopusApyJson_key('scopus_col_names.json')
 
-PARSED_SCOPUS_COLUMNS_NAMES   = list(scopus_column_names_dict.keys())
+PARSED_SCOPUS_COLUMNS_NAMES      = list(scopus_column_names_dict.keys())
 
-SELECTED_SCOPUS_COLUMNS_NAMES = [k for k,v in scopus_column_names_dict.items() if v] 
+SELECTED_SCOPUS_COLUMNS_NAMES    = [k for k,v in scopus_column_names_dict.items() if v] 
 
 
 # List of all columns that can be extracted from the results of a query on the scopus website
@@ -138,3 +138,13 @@ UNPARSED_SCOPUS_COLUMNS_NAMES = ["Molecular Sequence Numbers","Chemicals/CAS","T
 #                               "Conference name","Conference date","Conference location","Conference code",
 #                               "ISSN","ISBN","CODEN","PubMed ID","Language of Original Document",
 #                               "Abbreviated Source Title","Document Type","Publication Stage","Open Access","Source","EID",]
+
+
+# Default list of columns among the 'PARSED_SCOPUS_COLUMNS_NAMES' list that are kept in the scopus_df returned by 'json_parser' module 
+#SELECTED_SCOPUS_COLUMNS_NAMES = ["Authors","Author full names","Author(s) ID","Title","Year",
+#                                 "Source title","Volume","Issue","Art. No.","Page start","Page end",
+#                                 "Page count","Cited by","DOI","Link","Affiliations","Authors with affiliations",
+#                                 "Author Keywords","Index Keywords","References","Correspondence Address","Editors","Publisher",
+#                                 "ISSN","ISBN","CODEN","PubMed ID","Language of Original Document",
+#                                 "Abbreviated Source Title","Document Type","Publication Stage","Open Access","Source","EID",]
+  
