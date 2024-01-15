@@ -6,4 +6,4 @@ from ScopusApyJson.GLOBALS import *
 from ScopusApyJson.json_utils import *
 from ScopusApyJson.json_parser import *
 from ScopusApyJson.api_manager import *
-from ScopusApyJson.demo import *
+from ScopusApyJson.main import *

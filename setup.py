@@ -14,8 +14,8 @@ with open(path.join(this_directory, 'requirements.txt'), encoding='utf-8') as f:
 # This setup is suitable for "python setup.py develop".
 
 setup(name='ScopusApyJson',
-      version='0.0.0',
-      description='Python modules for parsing the JSON response to a Scopus Api request',
+      version='1.0.0',
+      description='Python modules for parsing the response to a Scopus API request',
       long_description=long_description,
       long_description_content_type='text/markdown',
       include_package_data = True,
@@ -24,11 +24,11 @@ setup(name='ScopusApyJson',
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.9',
-        'Topic :: Scientific/Engineering :: Information Parsinh',
+        'Topic :: Scientific/Engineering :: Information Analysis',
         'Operating System :: OS Independent',
         'Intended Audience :: Science/Research'
         ],
-      keywords = 'Metadata parsing, Scopus parsing, API management',
+      keywords = 'Metadata parsing, Scopus request, API management',
       install_requires = install_requires,
       entry_points={
                     'console_scripts': [
@@ -36,7 +36,7 @@ setup(name='ScopusApyJson',
                     'cli_json = ScopusApyJson.CLI.cli:cli_json'
                                        ],
                     },
-      author= 'BiblioAbnalysis team',
+      author= 'BiblioAnalysis team',
       author_email= 'francois.bertin7@wanadoo.fr, amal.chabli@orange.fr',
       url= 'https://github.com/TickyWill/ScopusApyJson',
       packages=find_packages(), # revoir le fonctionnement avec plusieurs packages

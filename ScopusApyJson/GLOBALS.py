@@ -1,12 +1,10 @@
 """
-config.py docs
-A custom config json is stored in the two  following directories:
-      ~/AppData/Roaming/api_scopus_config.json  and  contains user api scopus keys
-      .ScopusApyJson/api_scopus_config.json   contain the default setting 
-If the user's api_scopus_config.json configuration file exits it  will be used. Otherwise a user's configuration file Pvcharacterization.yaml 
-will be created in the user's ~/AppData/Roaming.
-The modification of the config variables will be stored in the Pvcharacterization.yaml stor in the user's WORRKING_DIR folder.
-
+A template of the config json file named "api_scopus_config.json" is stored in the ".ScopusApyJson/CONFIG" folder.
+The user's "api_scopus_config.json" should be located in the user's "~/AppData/Roaming/ScopusApyJson" folder 
+and the user is invited to fill this file with its scopus api authentication keys.    
+If the user's "api_scopus_config.json" file exits in the "~/AppData/Roaming/ScopusApyJson" folder, it will be used. 
+Otherwise, a copy of the template file of the ".ScopusApyJson/CONFIG" folder will be automatically created 
+in the user's "~/AppData/Roaming/ScopusApyJson" folder in order to be filled with the user's scopus api authentication keys.
 """
 
 __all__ = ['API_CONFIG_DICT',
@@ -16,9 +14,11 @@ __all__ = ['API_CONFIG_DICT',
            'SELECTED_SCOPUS_COLUMNS_NAMES',
           ]
 
+# Header of the query for the Scopus API
 ELS_LINK = "https://api.elsevier.com/content/abstract/" 
 
-def get_config_dir():
+# Internal functions to build the Globals
+def _get_config_dir():
 
     """
     Returns a parent directory path
@@ -62,7 +62,7 @@ def _check_api_keys(API_CONFIG_DICT):
         API_CONFIG_DICT["insttoken"] = input("your institution token provided by Elsevier support staff:")
         _dump_json(API_CONFIG_PATH, API_CONFIG_DICT)     
 
-def _config_ScopusApyJson_key(json_file_name):
+def _config_ScopusApyJson_dict(json_file_name):
     # Standard library imports
     import json
     import os.path
@@ -75,7 +75,7 @@ def _config_ScopusApyJson_key(json_file_name):
         json_config_dict = json.load(file)
         
     # Sets the json_config_dict according to the status of the local config file        
-    local_config_dir_path  = get_config_dir() / Path('ScopusApyJson')
+    local_config_dir_path  = _get_config_dir() / Path('ScopusApyJson')
     local_config_file_path = local_config_dir_path  / Path(json_file_name)
     
     if os.path.exists(local_config_file_path):
@@ -96,55 +96,20 @@ def _config_ScopusApyJson_key(json_file_name):
         # thus package config file is used to create a local config file
         # to be filled by the user
         # and json_config_dict is kept at default values
-        if not os.path.exists(get_config_dir() / Path('ScopusApyJson')):
-            os.makedirs(get_config_dir() / Path('ScopusApyJson'))
+        if not os.path.exists(_get_config_dir() / Path('ScopusApyJson')):
+            os.makedirs(_get_config_dir() / Path('ScopusApyJson'))
         _dump_json(local_config_file_path, json_config_dict)      
     
     return json_config_dict, local_config_file_path
 
-
-API_CONFIG_DICT, API_CONFIG_PATH = _config_ScopusApyJson_key('api_scopus_config.json')
+# Getting the authentication key and the institution token through the json file 'api_scopus_config.json'
+# stored in the folder ".ScopusApyJson/CONFIG"
+API_CONFIG_DICT, API_CONFIG_PATH = _config_ScopusApyJson_dict('api_scopus_config.json')
 _check_api_keys(API_CONFIG_DICT)
 
-scopus_column_names_dict, _      = _config_ScopusApyJson_key('scopus_col_names.json')
-
-PARSED_SCOPUS_COLUMNS_NAMES      = list(scopus_column_names_dict.keys())
-
-SELECTED_SCOPUS_COLUMNS_NAMES    = [k for k,v in scopus_column_names_dict.items() if v] 
-
-
-# List of all columns that can be extracted from the results of a query on the scopus website
-# This list is only informative to user 
-FULL_SCOPUS_COLUMNS_NAMES = ["Authors","Author full names","Author(s) ID","Title","Year",
-                             "Source title","Volume","Issue","Art. No.","Page start","Page end",
-                             "Page count","Cited by","DOI","Link","Affiliations","Authors with affiliations","Abstract",
-                             "Author Keywords","Index Keywords","Molecular Sequence Numbers","Chemicals/CAS",
-                             "Tradenames","Manufacturers","Funding Details","Funding Texts",
-                             "References","Correspondence Address","Editors","Publisher","Sponsors",
-                             "Conference name","Conference date","Conference location","Conference code",
-                             "ISSN","ISBN","CODEN","PubMed ID","Language of Original Document",
-                             "Abbreviated Source Title","Document Type","Publication Stage","Open Access","Source","EID",]
-
-# List of columns among 'FULL_SCOPUS_COLUMNS_NAMES' columns list that are not parsed in the 'json_parser' module 
-# This list is only informative to user 
-UNPARSED_SCOPUS_COLUMNS_NAMES = ["Molecular Sequence Numbers","Chemicals/CAS","Tradenames","Manufacturers",
-                                "Funding Details","Funding Texts","Sponsors",]
-
-# List of columns among the 'FULL_SCOPUS_COLUMNS_NAMES' list that are parsed in the 'json_parser' module 
-#PARSED_SCOPUS_COLUMNS_NAMES = ["Authors","Author full names","Author(s) ID","Title","Year",
-#                               "Source title","Volume","Issue","Art. No.","Page start","Page end",
-#                               "Page count","Cited by","DOI","Link","Affiliations","Authors with affiliations","Abstract",
-#                               "Author Keywords","Index Keywords","References","Correspondence Address","Editors","Publisher",
-#                               "Conference name","Conference date","Conference location","Conference code",
-#                               "ISSN","ISBN","CODEN","PubMed ID","Language of Original Document",
-#                               "Abbreviated Source Title","Document Type","Publication Stage","Open Access","Source","EID",]
-
-
-# Default list of columns among the 'PARSED_SCOPUS_COLUMNS_NAMES' list that are kept in the scopus_df returned by 'json_parser' module 
-#SELECTED_SCOPUS_COLUMNS_NAMES = ["Authors","Author full names","Author(s) ID","Title","Year",
-#                                 "Source title","Volume","Issue","Art. No.","Page start","Page end",
-#                                 "Page count","Cited by","DOI","Link","Affiliations","Authors with affiliations",
-#                                 "Author Keywords","Index Keywords","References","Correspondence Address","Editors","Publisher",
-#                                 "ISSN","ISBN","CODEN","PubMed ID","Language of Original Document",
-#                                 "Abbreviated Source Title","Document Type","Publication Stage","Open Access","Source","EID",]
+# Getting the names of the selected scopus columns by the user through the json file "scopus_col_names.json" 
+# stored in the folder ""~/AppData/Roaming/ScopusApyJson" of vthe user
+scopus_column_names_dict, _   = _config_ScopusApyJson_dict('scopus_col_names.json')
+PARSED_SCOPUS_COLUMNS_NAMES   = list(scopus_column_names_dict.keys())
+SELECTED_SCOPUS_COLUMNS_NAMES = [k for k,v in scopus_column_names_dict.items() if v] 
   

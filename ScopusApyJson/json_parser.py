@@ -24,7 +24,8 @@ def _built_date(dic, key):
 
 
 def _parse_source_info(json_data, article_dic):
-    '''Parse the field "source" under 'asbtracts-retrieval-response/item/bibrecord/head'.
+    '''Parse the field "source" under the top 
+    "field asbtracts-retrieval-response/item/bibrecord/head".
     '''
     
     # Local library imports
@@ -99,7 +100,8 @@ def _parse_source_info(json_data, article_dic):
 
         
 def _parse_citation_info(json_data, article_dic):
-    '''Parse the field "citation-info" under 'asbtracts-retrieval-response/item/bibrecord/head'.
+    '''Parse the field "citation-info" under the top field 
+    "asbtracts-retrieval-response/item/bibrecord/head".
     '''
     # Local library imports
     from ScopusApyJson.json_utils import check_not_none
@@ -112,8 +114,10 @@ def _parse_citation_info(json_data, article_dic):
 
     
 def _parse_ordered_authors(json_data, article_dic):
-    '''Parse the field 'author' under the leaf 'astracts-retrieval-response/authors'.
-    This field is a dict if there is only one author otherwise it is a list of dict.
+    '''Parse the field "author" under the top field 
+    "astracts-retrieval-response/authors".
+    The field "author" is a dict if there is only 
+    one author otherwise it is a list of dict.
     '''
     
     # Local library imports
@@ -144,8 +148,10 @@ def _parse_ordered_authors(json_data, article_dic):
     
     
 def _parse_authors_affiliations(json_data, article_dic):
-    '''Parse the field "author-group" under the leaf "abstracts-retrieval-response/item/bibrecord/head".
-    This field is a dict if there is only one author, otherwise it is a list of dict .
+    '''Parse the field "author-group" under the top field 
+    "abstracts-retrieval-response/item/bibrecord/head".
+    The field "author-group" is a dict if there is only one author, 
+    otherwise it is a list of dict .
     '''
     
     # Standard library imports
@@ -199,8 +205,10 @@ def _parse_authors_affiliations(json_data, article_dic):
 
     
 def _parse_correspondence_address(json_data, article_dic):
-    '''Parse the field 'correspondence' under the leaf 'abstracts-retrieval-response/item/bibrecord/head'.
-    This field is a dict if there is only one corresponding person, otherwise it is a list of dict.
+    '''Parse the field "correspondence" under the top field 
+    "abstracts-retrieval-response/item/bibrecord/head".
+    The field "correspondence" is a dict if there is only one corresponding person, 
+    otherwise it is a list of dict.
     '''
     # Local library imports
     from ScopusApyJson.json_utils import check_true_to_append
@@ -233,8 +241,9 @@ def _parse_correspondence_address(json_data, article_dic):
 
     
 def _parse_references(json_data, article_dic):
-    '''Parse the field 'bibliography' under the leaf 'abstracts-retrieval-response/item/bibrecord/tail'.
-    This field is a dict keyyed by "$" if it is not None.
+    '''Parse the field "bibliography" under the top field 
+    "abstracts-retrieval-response/item/bibrecord/tail".
+    The field "bibliography" is a dict keyyed by "$" if it is not None.
     '''
     # Local library imports
     from ScopusApyJson.json_utils import check_not_none
@@ -302,8 +311,8 @@ def _parse_references(json_data, article_dic):
 
         
 def _parse_index_keywords(json_data, article_dic):
-    '''Parse the field 'idxterms' under the leaf 'abstracts-retrieval-response'.
-    This field is a dict keyyed by "$" if it is not None.
+    '''Parse the field "idxterms" under the top field "abstracts-retrieval-response".
+    The field "idxterms" is a dict keyyed by "$" if it is not None.
     '''
     # Local library imports
     from ScopusApyJson.json_utils import check_not_none
@@ -317,8 +326,8 @@ def _parse_index_keywords(json_data, article_dic):
 
         
 def _parse_author_keywords(json_data, article_dic):
-    '''Parse the field 'authkeywords' under the leaf 'abstracts-retrieval-response'.
-    This field is a dict keyyed by "$" if it is not None.
+    '''Parse the field "authkeywords" under the top field "abstracts-retrieval-response".
+    The field "authkeywords" is a dict keyyed by "$" if it is not None.
     '''
     # Local library imports
     from ScopusApyJson.json_utils import check_not_none
@@ -333,7 +342,7 @@ def _parse_author_keywords(json_data, article_dic):
 
 
 def _parse_coredata(json_data, article_dic):
-    '''parse the field 'coredata' under the leaf 'abstracts-retrieval-response'.
+    '''Parse the field "coredata" under the top field "abstracts-retrieval-response".
     '''
     # Local library imports
     from ScopusApyJson.json_utils import get_json_key_value
@@ -386,6 +395,19 @@ def _make_json_data_dict(json_data, article_dic):
 
 
 def parse_json_data_to_scopus_df(json_data):
+    '''The function `parse_json_data_to_scopus_df` parses 
+    the hierarchical dict of the data "json_data". Then it builds
+    the dataframe which colums are specified by the global 
+    "SELECTED_SCOPUS_COLUMNS_NAMES".
+    
+    Args:
+        json_data (dict): The hierarchical dict built by the function 
+        `get_doi_json_data_from_api`.
+        
+    Returns:
+        (pandas.core.frame.DataFrame): The dataframe resulting 
+        from the hierarchical dict parsing.
+    '''
     # Standard library imports
     import json as json
     

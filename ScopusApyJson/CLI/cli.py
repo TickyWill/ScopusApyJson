@@ -9,7 +9,7 @@ def cli_doi():
     
     # Local library imports
     import ScopusApyJson as saj
-    from ScopusApyJson.demo import build_scopus_df_from_api    
+    from ScopusApyJson.main import build_scopus_df_from_api    
     
     parser = ArgumentParser()
     parser.usage = '''Usage cli_doi -d <doi1 doi2 ...>  -o <results folder path>
