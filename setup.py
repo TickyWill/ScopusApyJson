@@ -1,23 +1,24 @@
 #!/usr/bin/env python
 
+# Standard library imports
 from setuptools import setup, find_packages
 from os import path
 
-# read the contents of your README file
+# Reading the content of the "README.md" file
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
-    
+
+# Reading the content of the "requirements.txt" file
 with open(path.join(this_directory, 'requirements.txt'), encoding='utf-8') as f:
     install_requires = f.read().strip().split('\n')
 
-# This setup is suitable for "python setup.py develop".
-
-setup(name='ScopusApyJson',
-      version='1.0.0',
-      description='Python modules for parsing the response to a Scopus API request',
-      long_description=long_description,
-      long_description_content_type='text/markdown',
+# Setting the setup parameters
+setup(name = 'ScopusApyJson',
+      version = '1.0.0',
+      description = 'Python modules for parsing the response to a Scopus API request',
+      long_description = long_description,
+      long_description_content_type = 'text/markdown',
       include_package_data = True,
       license = 'MIT',
       classifiers = [
@@ -30,14 +31,14 @@ setup(name='ScopusApyJson',
         ],
       keywords = 'Metadata parsing, Scopus request, API management',
       install_requires = install_requires,
-      entry_points={
-                    'console_scripts': [
-                    'cli_doi = ScopusApyJson.CLI.cli:cli_doi',
-                    'cli_json = ScopusApyJson.CLI.cli:cli_json'
-                                       ],
-                    },
-      author= 'BiblioAnalysis team',
-      author_email= 'francois.bertin7@wanadoo.fr, amal.chabli@orange.fr',
-      url= 'https://github.com/TickyWill/ScopusApyJson',
-      packages=find_packages(), # revoir le fonctionnement avec plusieurs packages
+      entry_points = {
+        'console_scripts': [
+                            'cli_doi = ScopusApyJson.CLI.cli:cli_doi',
+                            'cli_json = ScopusApyJson.CLI.cli:cli_json'
+                            ],
+         },
+      author = 'BiblioAnalysis team',
+      author_email = 'francois.bertin7@wanadoo.fr, amal.chabli@orange.fr',
+      url = 'https://github.com/TickyWill/ScopusApyJson',
+      packages = find_packages(), 
       )

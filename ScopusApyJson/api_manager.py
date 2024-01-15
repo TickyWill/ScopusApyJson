@@ -2,13 +2,13 @@ __all__ = ['get_doi_json_data_from_api',]
 
 def _set_els_doi_api(MyScopusKey, MyInstKey, doi):
     """The internal function `_set_els_doi_api` sets, for the DOI 'doi', 
-    the query 'els_api' according to the scopus api usage 
+    the query 'els_api' according to the Scopus API usage 
     which header is given by the global 'ELS_LINK'.
     
     Args:
         MyScopusKey (str): The user's authentication key.
         MyInstKey (str): The user's institution token.
-        doi (str): The publication DOI for which the scopus api will provide information. 
+        doi (str): The publication DOI for which the Scopus API will provide information. 
         
     Returns:
         (str): The query for the passed DOI according to the scopus api usage.
@@ -33,19 +33,19 @@ def _set_els_doi_api(MyScopusKey, MyInstKey, doi):
 
 def _get_json_from_api(doi, api_config_dict):
     """The internal function `_get_json_from_api` gets, for the DOI 'doi', 
-    the response of to the query 'els_api' built using the internal function `_set_els_doi_api`.
+    the response to the query 'els_api' built using the internal function `_set_els_doi_api`.
     It passes to this function the user's authentication key 'MyScopusKey' and the user's 
     institutional token 'MyInstKey' given by the dict 'api_config_dict'. 
     It also increments the number of requests performed by the user. The number is updated 
     in the dict 'api_config_dict' at key 'api_uses_nb'.
     
     Args:
-        doi (str): The publication DOI for which the scopus api will provide data.
+        doi (str): The publication DOI for which the Scopus API will provide data.
         api_config_dict (dict): The dict wich values are the user's authentication key, the user's 
         institutional token and the number of requests performed. 
         
     Returns:
-        (tup): The tup composed by the json-serialized response (hierarchical dict) 
+        (tup): The tup composed by the hierarchical-dict response
         to the query and the updated 'api_config_dict' dict.
 
     """    
