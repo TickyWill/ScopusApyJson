@@ -55,7 +55,7 @@ def _check_api_keys(API_CONFIG_DICT):
       
     dict_apikey    = API_CONFIG_DICT["apikey"]
     dict_insttoken = API_CONFIG_DICT["insttoken"]
-    if (dict_apikey ==  "PAST_APIKEY_HERE") or (dict_insttoken == "PAST_INSTTOKEN_HERE"):
+    if (dict_apikey in  ["PAST_APIKEY_HERE", ""]) or (dict_insttoken in ["PAST_INSTTOKEN_HERE", ""]):
         message  = "Authentication keys are not yet defined (required).\n"
         warnings.warn(message)
         API_CONFIG_DICT["apikey"]    = input("Enter your authentication key (obtained from http://dev.elsevier.com):")
@@ -110,6 +110,6 @@ _check_api_keys(API_CONFIG_DICT)
 # Getting the names of the selected scopus columns by the user through the json file "scopus_col_names.json" 
 # stored in the folder ""~/AppData/Roaming/ScopusApyJson" of vthe user
 scopus_column_names_dict, _   = _config_ScopusApyJson_dict('scopus_col_names.json')
-PARSED_SCOPUS_COLUMNS_NAMES   = list(scopus_column_names_dict.keys())
-SELECTED_SCOPUS_COLUMNS_NAMES = [k for k,v in scopus_column_names_dict.items() if v] 
+PARSED_SCOPUS_COLUMNS_NAMES   = list(scopus_column_names_dict.keys())[1:]
+SELECTED_SCOPUS_COLUMNS_NAMES = [k for k,v in scopus_column_names_dict.items() if v][1:] 
   

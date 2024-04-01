@@ -20,10 +20,11 @@ scopus_df.to_excel(<your_fullpath_file.xlsx), index = False)
 
 
 # Release History
-1.0.0 first release
+- 1.0.0 first release
+- 1.1.0 check of fields availability when parsing the request response
 
 
 # Meta
-	- authors : BiblioAbnalysis team
+	- authors : BiblioAnalysis team
 
 Distributed under the [MIT license](https://mit-license.org/)

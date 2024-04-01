@@ -58,6 +58,8 @@ def _get_json_from_api(doi, api_config_dict):
     MyScopusKey = api_config_dict["apikey"]
     MyInstKey   = api_config_dict["insttoken"]
     api_uses_nb = api_config_dict['api_uses_nb']
+    if (MyScopusKey in  ["PAST_APIKEY_HERE", ""]) or (MyInstKey in ["PAST_INSTTOKEN_HERE", ""]):
+        response_status = "Wrong authentication"
 
     # Setting Elsevier API
     els_api = _set_els_doi_api(MyScopusKey, MyInstKey, doi)
@@ -69,21 +71,21 @@ def _get_json_from_api(doi, api_config_dict):
     try:
         response = requests.get(els_api, timeout = 10)   
     except Timeout:
-        print('The request timed out')
+        response_status = "Timeout"
     else:
-        if response == False: # response.status_code <200 or > 400
-            print('Resource not found')
+        if response == False: # response.status_code <200
+            response_status = "False"
         else:
-            print(f'Resquest successful for DOI {doi}')
-            if response.status_code == 204:
-                print('No content')
-            else:            
+            if response.status_code in [204, 404]:
+                response_status = "Empty"
+            else:
+                response_status = "True"
                 response_dict = response.json()
                 
         # Updating api_uses_nb in config_dict
         api_config_dict["api_uses_nb"] = api_uses_nb + 1
     
-    return (response_dict, api_config_dict)
+    return (response_dict, api_config_dict, response_status)
 
 
 def _update_api_config_json(API_CONFIG_PATH, API_CONFIG_DICT):
@@ -115,9 +117,9 @@ def get_doi_json_data_from_api(doi):
     from ScopusApyJson.GLOBALS import API_CONFIG_PATH
     
     # Getting api json data
-    doi_json_data, API_CONFIG_DICT = _get_json_from_api(doi, API_CONFIG_DICT)
+    doi_json_data, API_CONFIG_DICT, request_status = _get_json_from_api(doi, API_CONFIG_DICT)
     
     # Updatting api config json with number of requests
     _update_api_config_json(API_CONFIG_PATH, API_CONFIG_DICT)
     
-    return doi_json_data
+    return (doi_json_data, request_status)

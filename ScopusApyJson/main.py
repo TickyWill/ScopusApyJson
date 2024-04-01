@@ -20,15 +20,25 @@ def build_scopus_df_from_api(doi_list):
     import pandas as pd
     
     # Local library imports
+    from ScopusApyJson.GLOBALS import SELECTED_SCOPUS_COLUMNS_NAMES
     from ScopusApyJson.api_manager import get_doi_json_data_from_api
     from ScopusApyJson.json_parser import parse_json_data_to_scopus_df
     
     if not isinstance(doi_list, list): doi_list = [doi_list]
     scopus_df_list = []
-    for idx, doi in enumerate(doi_list) :
-        api_json_data = get_doi_json_data_from_api(doi)
-        scopus_df     = parse_json_data_to_scopus_df(api_json_data)
-        scopus_df_list.append(scopus_df)
-    api_scopus_df = pd.concat(scopus_df_list, axis = 0)
+    api_scopus_df = pd.DataFrame(columns = SELECTED_SCOPUS_COLUMNS_NAMES)
+    for idx, doi in enumerate(doi_list):        
+        api_json_data, request_status = get_doi_json_data_from_api(doi)        
+        if request_status == "Empty":
+            print(f'DOI {doi} not found in Scopus database')
+        elif request_status == "False":
+            print('Authentication failed: please check availability of authentication keys')
+        elif request_status == "Timeout":
+            print('Request timeout: please check web access')
+        else:
+            print(f'Resquest successful for DOI {doi}')           
+            scopus_df = parse_json_data_to_scopus_df(api_json_data)
+            scopus_df_list.append(scopus_df)
+            api_scopus_df = pd.concat(scopus_df_list, axis = 0)
     
     return api_scopus_df
