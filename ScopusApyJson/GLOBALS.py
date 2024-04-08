@@ -1,10 +1,10 @@
 """
 A template of the config json file named "api_scopus_config.json" is stored in the ".ScopusApyJson/CONFIG" folder.
-The user's "api_scopus_config.json" should be located in the user's "~/AppData/Roaming/ScopusApyJson" folder 
+The user's "api_scopus_config.json" should be located in the user's folder returned by the function `_get_config_dir`
 and the user is invited to fill this file with its scopus api authentication keys.    
-If the user's "api_scopus_config.json" file exits in the "~/AppData/Roaming/ScopusApyJson" folder, it will be used. 
-Otherwise, a copy of the template file of the ".ScopusApyJson/CONFIG" folder will be automatically created 
-in the user's "~/AppData/Roaming/ScopusApyJson" folder in order to be filled with the user's scopus api authentication keys.
+If the user's "api_scopus_config.json" file exits in this user's folder, it will be used. 
+Otherwise, a copy of the template file of the ".ScopusApyJson/CONFIG" folder of the ScopusApyJson package 
+will be automatically created in the user's folder in order to be filled with the user's scopus api authentication keys.
 """
 
 __all__ = ['API_CONFIG_DICT',

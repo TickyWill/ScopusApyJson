@@ -228,8 +228,8 @@ def _parse_correspondence_address(json_data, article_dic):
     correspondence_list = get_json_key_value(json_data, 'correspondence')
     if check_not_none(correspondence_list):
         person_address_list = []
-        if not isinstance(correspondence_list, list) : correspondence_list = [correspondence_list]
-        for correspondence_dict in correspondence_list:        
+        if not isinstance(correspondence_list, list) : correspondence_list = [correspondence_list]        
+        for correspondence_dict in correspondence_list:
             correspondence_person_dict = get_json_key_value(correspondence_dict, 'person')
             if check_not_none(correspondence_person_dict):
                 correspondence_person = get_json_key_value(correspondence_person_dict, 'ce:indexed-name')
@@ -237,11 +237,13 @@ def _parse_correspondence_address(json_data, article_dic):
             # Building affiliation full address
             affiliation = get_json_key_value(correspondence_dict, 'affiliation')
             if check_not_none(affiliation):
-                organizations_list = get_json_key_value(affiliation, 'organization')
-                if not isinstance(organizations_list, list) : organizations_list = [organizations_list]
                 address_items_list = []
-                for organization_dict in organizations_list:
-                    address_items_list.append(get_json_key_value(organization_dict, '$'))
+                organizations_list = get_json_key_value(affiliation, 'organization')
+                if check_not_none(organizations_list):
+                    if not isinstance(organizations_list, list) : organizations_list = [organizations_list]
+                    
+                    for organization_dict in organizations_list:
+                        address_items_list.append(get_json_key_value(organization_dict, '$'))
                 address_items_list = check_true_to_append(affiliation, 'address-part', address_items_list)
                 address_items_list = check_true_to_append(affiliation, 'city', address_items_list)
                 address_items_list = check_true_to_append(affiliation, 'postal-code', address_items_list)

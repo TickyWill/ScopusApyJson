@@ -12,9 +12,17 @@ pip install ScopusApyJson
 ```python
 import ScopusApyJson as saj
 
-doi_list = ["doi/10.1016/j.fuproc.2022.107223",]
-scopus_df = saj.build_scopus_df_from_api(doi_list)
-scopus_df.to_excel(<your_fullpath_file.xlsx), index = False)
+doi_list = ["doi/10.1016/j.fuproc.2022.107223",
+            "doi/10.1109/pvsc48317.2022.9938766"]
+scopus_tup = saj.build_scopus_df_from_api(doi_list, timeout = 20, verbose = True)
+authy_status = scopus_tup[2]
+if authy_status: 
+    scopus_df = scopus_tup[0]
+    scopus_df.to_excel(<your_fullpath_file1> + ".xlsx", index = False)
+    failed_doi_df = scopus_tup[1]
+    failed_doi_df.to_excel(<your_fullpath_file2> + ".xlsx", index = False)
+else:
+    print("Authentication failed: please check availability of authentication keys")
 ```
 **for more exemples refer to** [ScopusApyJson-exemples](https://github.com/TickyWill/ScopusApyJson/Demo_ScopusApyJson.ipynb).
 
