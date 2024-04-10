@@ -79,6 +79,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+Demo_ScopusApyJson-Amal.ipynb
 
 # IPython
 profile_default/
