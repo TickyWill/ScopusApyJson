@@ -7,20 +7,20 @@ __all__ = ['check_not_none',
 def get_json_key_value(dic, key):
     '''Gets the value at key "key" of a hierarchical dict "dic".
     It checks the possible multiple occurences of the key.
-    It returns value only in the case of a single occurence of the key.
+    It returns only the first value in the case of multiple occurences of the key.
     
     Args:
         dic (dict): The hierarchical dict.
         key (str): The key which value is searched in the dict "dic".
         
     Returns:
-        (str, list or dict): The value at key "key" in the hierarchical 
-        dict "dic" for a single occurence of the key, 
-        otherwise "multiple_key" message or None if the dict is empty.
+        (str, list or dict): The first value at key "key" in the hierarchical 
+        dict "dic" whatever the number of occurences of the key, 
+        or None if the dict is empty or if the key is not present.
     
     '''
     if dic:
-        hit   = []
+        hit = []
         stack = list(zip(dic.keys(), dic.values()))
         while stack :
             k,v = stack.pop()
@@ -28,11 +28,10 @@ def get_json_key_value(dic, key):
                 hit.append(v)
             if isinstance(v, dict):
                 stack.extend(list(zip(v.keys(), v.values()))) 
-
-        if len(hit) == 1: return hit[0]
-        if len(hit) > 1 : return "multiple_key"
+        if len(hit): 
+            return hit[0]
+        else: return None
     else: return None
-
 
 def check_not_none(value):
     '''Checks if the parameter "value" is not None or not equal to "None".

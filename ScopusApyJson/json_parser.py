@@ -36,70 +36,102 @@ def _parse_source_info(json_data, article_dic):
     from ScopusApyJson.json_utils import check_true_to_set
     from ScopusApyJson.json_utils import get_json_key_value
     
-    source_dict = get_json_key_value(json_data, "source")
-    if check_not_none(source_dict):
-        article_dic['Year']                     = get_json_key_value(source_dict, "year")
-        article_dic['Source title']             = get_json_key_value(source_dict, 'sourcetitle')
-        article_dic['Abbreviated Source Title'] = get_json_key_value(source_dict, 'sourcetitle-abbrev')
-        article_dic['CODEN']                    = get_json_key_value(source_dict, 'codencode')
+    item_info = get_json_key_value(json_data, "item")
+    if check_not_none(item_info):
+        bibrecord_info = get_json_key_value(item_info, "bibrecord")
+        if check_not_none(bibrecord_info):
+            head_info = get_json_key_value(bibrecord_info, "head")
+            if check_not_none(head_info):
+                source_dict = get_json_key_value(head_info, "source")
+                if check_not_none(source_dict):
+                    year_dict = get_json_key_value(source_dict, "publicationyear")
+                    if check_not_none(year_dict):
+                        if not isinstance(year_dict, dict): year_dict = {'@first': year_dict}
+                        article_dic = check_true_to_set(year_dict, '@first', article_dic, 'Year')
+                    article_dic = check_true_to_set(source_dict, 'sourcetitle', article_dic, 'Source title')
+                    article_dic = check_true_to_set(source_dict, 'sourcetitle-abbrev', 
+                                                    article_dic, 'Abbreviated Source Title')
+                    article_dic = check_true_to_set(source_dict, 'codencode', article_dic, 'CODEN')
 
-        # Parsing issn
-        issn_info = get_json_key_value(source_dict, 'issn')
-        if check_not_none(issn_info):
-            if not isinstance(issn_info, list):
-                article_dic['ISSN'] = get_json_key_value(issn_info, '$')
-            else:    
-                for issn_dict in issn_info:
-                    issn_type = get_json_key_value(issn_dict, '@type')
-                    if issn_type == "print": article_dic['ISSN'] = get_json_key_value(issn_dict, '$')
+                    # parsing editors
+                    editors_list = []
+                    contributors_group = get_json_key_value(source_dict, 'contributor-group')
+                    if check_not_none(contributors_group):
+                        if not isinstance(contributors_group, list): contributors_group = [contributors_group]
+                        for contributor in contributors_group:
+                            contributor_name = get_json_key_value(contributor, 'ce:indexed-name')
+                            if check_not_none(contributor_name): editors_list.append(contributor_name)
+                        article_dic['Editors'] =  ','.join(editors_list)       
 
-        #Parsing isbn if available  
-        isbn_info = get_json_key_value(source_dict, 'isbn')
-        if check_not_none(isbn_info):
-            if not isinstance(isbn_info, list):
-                article_dic['ISBN'] = get_json_key_value(isbn_info, '$')            
-            else:
-                for isbn_dict in isbn_info:
-                    isbn_type = get_json_key_value(isbn_dict, '@type')
-                    if isbn_type == "print": article_dic['ISBN'] = get_json_key_value(isbn_dict, '$')
+                    # Parsing issn
+                    issn_info = get_json_key_value(source_dict, 'issn')
+                    if check_not_none(issn_info):
+                        if not isinstance(issn_info, list):
+                            article_dic = check_true_to_set(issn_info, '$', article_dic, 'ISSN')
+                        else:    
+                            for issn_dict in issn_info:
+                                issn_type = get_json_key_value(issn_dict, '@type')
+                                if issn_type == "print":
+                                    article_dic = check_true_to_set(issn_dict, '$', article_dic, 'ISSN')
 
-        # Parsing conference info if available
-        conference_info = get_json_key_value(source_dict, 'additional-srcinfo')
-        if check_not_none(conference_info):
-            conferenceinfo = get_json_key_value(conference_info, 'conferenceinfo')
-            if check_not_none(conferenceinfo):
-                confevent = get_json_key_value(conferenceinfo, 'confevent')
-                if check_not_none(confevent):
-                    article_dic['Conference name'] = get_json_key_value(confevent, 'confname')                
-                    article_dic['Conference code'] = get_json_key_value(confevent, 'confcode')
-                    conflocation = get_json_key_value(confevent, 'conflocation')
-                    if check_not_none(conflocation): 
-                        article_dic['Conference location'] = get_json_key_value(conflocation, 'city')
-                    confdates = get_json_key_value(confevent, 'confdate')
-                    if check_not_none(confdates):
-                        start_date = _built_date(confdates, 'startdate')
-                        end_date   = _built_date(confdates, 'enddate')                   
-                        article_dic['Conference date'] = start_date + " through " + end_date        
+                    # Parsing isbn if available  
+                    isbn_info = get_json_key_value(source_dict, 'isbn')
+                    if check_not_none(isbn_info):
+                        if not isinstance(isbn_info, list):
+                            article_dic = check_true_to_set(isbn_info, '$', article_dic, 'ISBN')         
+                        else:
+                            for isbn_dict in isbn_info:
+                                isbn_type = get_json_key_value(isbn_dict, '@type')
+                                if isbn_type == "print":
+                                    article_dic = check_true_to_set(isbn_dict, '$', article_dic, 'ISBN')
 
-        # Parsing volisspag if available          
-        article_dic = check_true_to_set(source_dict, 'article-number', article_dic, 'Art. No.')
-        volisspag   = get_json_key_value(source_dict, "volisspag")
-        if check_not_none(volisspag):
-            voliss      = get_json_key_value(volisspag, "voliss")
-            article_dic = check_true_to_set(voliss, '@volume', article_dic, 'Volume')
-            article_dic = check_true_to_set(voliss, '@issue', article_dic, 'Issue')
-            pagerange   = get_json_key_value(volisspag, "pagerange")
-            if check_not_none(pagerange): 
-                article_dic['Page start'] = get_json_key_value(pagerange, '@first')
-                article_dic['Page end']   = get_json_key_value(pagerange, '@last')
-                article_dic['Page count'] = str(int(article_dic['Page end']) - int(article_dic['Page start']))
+                    # Parsing conference info if available
+                    conference_info = get_json_key_value(source_dict, 'additional-srcinfo')
+                    if check_not_none(conference_info):
+                        conferenceinfo = get_json_key_value(conference_info, 'conferenceinfo')
+                        if check_not_none(conferenceinfo):
+                            confevent = get_json_key_value(conferenceinfo, 'confevent')
+                            if check_not_none(confevent):
+                                article_dic = check_true_to_set(confevent, 'confname', 
+                                                                article_dic, 'Conference name')
+                                article_dic = check_true_to_set(confevent, 'confname', 
+                                                                article_dic, 'Conference code')
+                                conflocation = get_json_key_value(confevent, 'conflocation')
+                                if check_not_none(conflocation):
+                                    article_dic = check_true_to_set(conflocation, 'city', 
+                                                                    article_dic, 'Conference location')
+                                confdates = get_json_key_value(confevent, 'confdate')
+                                if check_not_none(confdates):
+                                    start_date = _built_date(confdates, 'startdate')
+                                    end_date   = _built_date(confdates, 'enddate')              
+                                    article_dic['Conference date'] = start_date + " through " + end_date        
 
-        # Parsing publication stage
-        stage_info  = get_json_key_value(source_dict, 'publicationdate')
-        if "month" in stage_info.keys(): 
-            article_dic['Publication Stage'] = "Final" 
-        else:
-            article_dic['Publication Stage'] = "Article in press"
+                    # Parsing volisspag if available          
+                    article_dic = check_true_to_set(source_dict, 'article-number', article_dic, 'Art. No.')
+                    volisspag   = get_json_key_value(source_dict, "volisspag")
+                    if check_not_none(volisspag):
+                        voliss      = get_json_key_value(volisspag, "voliss")
+                        article_dic = check_true_to_set(voliss, '@volume', article_dic, 'Volume')
+                        article_dic = check_true_to_set(voliss, '@issue', article_dic, 'Issue')
+                        pagerange   = get_json_key_value(volisspag, "pagerange")
+                        if check_not_none(pagerange):
+                            article_dic = check_true_to_set(pagerange, '@first', article_dic, 'Page start')
+                            article_dic = check_true_to_set(pagerange, '@last', article_dic, 'Page end')
+                            if article_dic['Page start'] and article_dic['Page end']:
+                                try:
+                                    start_int = int(article_dic['Page start'])
+                                    end_int   = int(article_dic['Page end'])
+                                    int_status = True    
+                                except ValueError:
+                                    int_status = False
+                                if int_status: article_dic['Page count'] = str(end_int - start_int) 
+
+                    # Parsing publication stage
+                    stage_info  = get_json_key_value(source_dict, 'publicationdate')
+                    if "month" in stage_info.keys(): 
+                        article_dic['Publication Stage'] = "Final" 
+                    else:
+                        article_dic['Publication Stage'] = "Article in press"
 
         
 def _parse_citation_info(json_data, article_dic):
@@ -110,11 +142,19 @@ def _parse_citation_info(json_data, article_dic):
     from ScopusApyJson.json_utils import check_not_none
     from ScopusApyJson.json_utils import get_json_key_value
     
+    languages = None
+    language_list = []
+    
     citation_info = get_json_key_value(json_data, 'citation-info')
     if check_not_none(citation_info):
-        language_dict = get_json_key_value(citation_info, 'citation-language')
-        if check_not_none(language_dict): 
-            article_dic['Language of Original Document'] = get_json_key_value(language_dict, '@language')
+        language_group = get_json_key_value(citation_info, 'citation-language')
+        if check_not_none(language_group):
+            if not isinstance(language_group, list): language_group = [language_group] 
+            for language_dict in language_group:
+                language = get_json_key_value(language_dict, '@language')
+                if check_not_none(language): language_list.append(language)
+            if language_list: languages = ' & '.join(language_list)
+            article_dic['Language of Original Document'] = languages
 
     
 def _parse_ordered_authors(json_data, article_dic):
@@ -196,14 +236,15 @@ def _parse_authors_affiliations(json_data, article_dic):
                 # Appending "affiliation_address" to "affiliations_list"
                 affiliations_list.append(affiliation_address)
 
-            # Appending "affiliation_address" to "authors_with_affiliations_dict" for each author of the "affiliation_authors_list"
-            affiliation_authors_list = get_json_key_value(affiliation_dict, 'author')
-            if check_not_none(affiliation_authors_list):
-                if not isinstance(affiliation_authors_list, list) : affiliation_authors_list = [affiliation_authors_list]
-                for author in affiliation_authors_list:
-                    author_preferred_name = get_json_key_value(author, 'preferred-name')
-                    author_name           = get_json_key_value(author_preferred_name, 'ce:indexed-name')
-                    authors_with_affiliations_dict[author_name].append(affiliation_address)
+                # Appending "affiliation_address" to "authors_with_affiliations_dict" 
+                # for each author of the "affiliation_authors_list"
+                affiliation_authors_list = get_json_key_value(affiliation_dict, 'author')
+                if check_not_none(affiliation_authors_list):
+                    if not isinstance(affiliation_authors_list, list) : affiliation_authors_list = [affiliation_authors_list]
+                    for author in affiliation_authors_list:
+                        author_preferred_name = get_json_key_value(author, 'preferred-name')
+                        author_name           = get_json_key_value(author_preferred_name, 'ce:indexed-name')
+                        authors_with_affiliations_dict[author_name].append(affiliation_address)
 
         # Ordering the "authors_with_affiliations_list" in the order of the "ordered_authors"
         for author in ordered_authors:
@@ -230,10 +271,12 @@ def _parse_correspondence_address(json_data, article_dic):
         person_address_list = []
         if not isinstance(correspondence_list, list) : correspondence_list = [correspondence_list]        
         for correspondence_dict in correspondence_list:
+            correspondence_info = ""
             correspondence_person_dict = get_json_key_value(correspondence_dict, 'person')
             if check_not_none(correspondence_person_dict):
                 correspondence_person = get_json_key_value(correspondence_person_dict, 'ce:indexed-name')
-
+                if check_not_none(correspondence_person): correspondence_info = correspondence_person
+                    
             # Building affiliation full address
             affiliation = get_json_key_value(correspondence_dict, 'affiliation')
             if check_not_none(affiliation):
@@ -249,12 +292,12 @@ def _parse_correspondence_address(json_data, article_dic):
                 address_items_list = check_true_to_append(affiliation, 'postal-code', address_items_list)
                 address_items_list = check_true_to_append(affiliation, 'country', address_items_list)
                 correspondence_address = ', '.join(address_items_list)
-
-            person_address_list.append(correspondence_person + "; " + correspondence_address)
+                if correspondence_info: correspondence_info += "; " + correspondence_address                                
+            person_address_list.append(correspondence_info)
 
         article_dic['Correspondence Address'] = '; '.join(person_address_list)
-
-    
+        
+        
 def _parse_references(json_data, article_dic):
     '''Parse the field "bibliography" under the top field 
     "abstracts-retrieval-response/item/bibrecord/tail".

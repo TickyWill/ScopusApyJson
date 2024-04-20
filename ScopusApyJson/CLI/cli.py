@@ -38,7 +38,7 @@ def cli_doi():
         print(f'Option and command-line argument given: "-o {out_path}"')
     
     doi_list = args.doi
-    api_scopus_df = build_scopus_df_from_api(doi_list)
+    api_scopus_df = build_scopus_df_from_api(doi_list, timeout = 20, verbose = True )
     output_file = out_path / Path('scopus_result.csv')
     api_scopus_df.to_csv(output_file,
                          header = True,
@@ -51,7 +51,7 @@ def cli_json():
     from argparse import ArgumentParser, Namespace
 
     parser = ArgumentParser()
-    parser.add_argument('file',help='json file to parse', type=str)
+    parser.add_argument('file', help = 'json file to parse', type = str)
     args : Namespace = parser.parse_args()
     print(args.file)
     
