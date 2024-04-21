@@ -209,6 +209,22 @@ def _parse_authors_affiliations(json_data, article_dic):
     from ScopusApyJson.json_utils import check_true_to_append
     from ScopusApyJson.json_utils import get_json_key_value
     
+    # Internal functions
+    def _append_address():
+        # Appending "affiliation_address" to "authors_with_affiliations_dict" 
+        # for each author of the "affiliation_authors_list"
+        affiliation_authors_list = get_json_key_value(affiliation_dict, 'author')
+        if check_not_none(affiliation_authors_list):
+            if not isinstance(affiliation_authors_list, list): 
+                affiliation_authors_list = [affiliation_authors_list]
+            for author in affiliation_authors_list:
+                author_preferred_name = get_json_key_value(author, 'preferred-name')
+                if check_not_none(author_preferred_name):
+                    author_name = get_json_key_value(author_preferred_name, 'ce:indexed-name')
+                    if check_not_none(author_name):
+                        authors_with_affiliations_dict[author_name].append(affiliation_address)
+
+    # Initializing parameters
     authors_with_affiliations_dict = defaultdict(list)
     authors_with_affiliations_list = []
     affiliations_list              = []
@@ -221,33 +237,41 @@ def _parse_authors_affiliations(json_data, article_dic):
             affiliation = get_json_key_value(affiliation_dict, 'affiliation')
             if check_not_none(affiliation):
                 address_items_list = []
+                affiliation_address = ""
                 # Building affiliation full address
                 organizations_list = get_json_key_value(affiliation, 'organization')
                 if check_not_none(organizations_list):
                     if not isinstance(organizations_list, list) : organizations_list = [organizations_list]                    
                     for organization_dict in organizations_list:
-                        address_items_list.append(get_json_key_value(organization_dict, '$'))        
-                address_items_list = check_true_to_append(affiliation, 'address-part', address_items_list)
-                address_items_list = check_true_to_append(affiliation, 'city', address_items_list)
-                address_items_list = check_true_to_append(affiliation, 'postal-code', address_items_list)
-                address_items_list = check_true_to_append(affiliation, 'country', address_items_list)
-                affiliation_address = ', '.join(address_items_list)
-
-                # Appending "affiliation_address" to "affiliations_list"
-                affiliations_list.append(affiliation_address)
-
-                # Appending "affiliation_address" to "authors_with_affiliations_dict" 
-                # for each author of the "affiliation_authors_list"
-                affiliation_authors_list = get_json_key_value(affiliation_dict, 'author')
-                if check_not_none(affiliation_authors_list):
-                    if not isinstance(affiliation_authors_list, list) : affiliation_authors_list = [affiliation_authors_list]
-                    for author in affiliation_authors_list:
-                        author_preferred_name = get_json_key_value(author, 'preferred-name')
-                        author_name           = get_json_key_value(author_preferred_name, 'ce:indexed-name')
-                        authors_with_affiliations_dict[author_name].append(affiliation_address)
+                        address_items_list.append(get_json_key_value(organization_dict, '$'))                
+                    address_items_list = check_true_to_append(affiliation, 'address-part', address_items_list)
+                    address_items_list = check_true_to_append(affiliation, 'city', address_items_list)
+                    address_items_list = check_true_to_append(affiliation, 'postal-code', address_items_list)
+                    address_items_list = check_true_to_append(affiliation, 'country', address_items_list)
+                    affiliation_address = ', '.join(address_items_list)
+                    
+                    # Appending "affiliation_address" to "affiliations_list"
+                    affiliations_list.append(affiliation_address)
+                
+                    # Appending "affiliation_address" to "authors_with_affiliations_dict" 
+                    # for each author of the "affiliation_authors_list"
+                    _append_address()
+                else:
+                    organizations_text = get_json_key_value(affiliation, 'ce:text')
+                    if check_not_none(organizations_text):
+                        organizations_list = [x.strip() for x in organizations_text.split(";") if x]
+                        affiliation_address = ', '.join(organizations_list)
+                        
+                        # Appending "affiliation_address" to "affiliations_list"
+                        affiliations_list += organizations_list
+                        
+                        # Appending "affiliation_address" to "authors_with_affiliations_dict" 
+                        # for each author of the "affiliation_authors_list"
+                        _append_address()
 
         # Ordering the "authors_with_affiliations_list" in the order of the "ordered_authors"
         for author in ordered_authors:
+            if not authors_with_affiliations_dict[author]: authors_with_affiliations_dict[author] = ""
             author_affiliations_list = authors_with_affiliations_dict[author]
             authors_with_affiliations_list.append(f"{author}, {', '.join(author_affiliations_list)}")        
 
