@@ -30,6 +30,7 @@ else:
 # Release History
 - 1.0.0 first release
 - 1.1.0 check of fields availability when parsing the request response
+- 1.1.1 updated args of build_scopus_df_from_api function
 
 
 # Meta
