@@ -35,6 +35,7 @@ def build_scopus_df_from_api(doi_list, timeout = None, verbose = False):
     if not isinstance(doi_list, list): doi_list = [doi_list]
     scopus_df_list = []
     failed_num = 0
+    authy_status = False
     failed_doi_df = pd.DataFrame(columns = ["DOI","Fail reason"])
     api_scopus_df = pd.DataFrame(columns = saj_globals.SELECTED_SCOPUS_COLUMNS_NAMES)
     for _, doi in enumerate(doi_list):        
