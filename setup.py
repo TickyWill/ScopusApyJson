@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 # Standard library imports
-from setuptools import setup, find_packages
 from os import path
+from setuptools import setup, find_packages
 
 # Reading the content of the "README.md" file
 this_directory = path.abspath(path.dirname(__file__))
@@ -15,7 +15,7 @@ with open(path.join(this_directory, 'requirements.txt'), encoding='utf-8') as f:
 
 # Setting the setup parameters
 setup(name = 'ScopusApyJson',
-      version = '1.1.1',
+      version = '1.1.2',
       description = 'Python modules for parsing the response to a Scopus API request',
       long_description = long_description,
       long_description_content_type = 'text/markdown',
@@ -40,5 +40,5 @@ setup(name = 'ScopusApyJson',
       author = 'BiblioAnalysis team',
       author_email = 'francois.bertin7@wanadoo.fr, amal.chabli@orange.fr',
       url = 'https://github.com/TickyWill/ScopusApyJson',
-      packages = find_packages(), 
+      packages = find_packages(),
       )

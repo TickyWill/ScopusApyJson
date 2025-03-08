@@ -1,22 +1,18 @@
-def cli_doi():
+"""Module setting useful CLIs."""
 
-    # Standard library imports
-    from argparse import ArgumentParser, Namespace
-    from pathlib  import Path  
-    
-    # 3rd party imports
-    import pandas as pd
-    
-    # Local library imports
-    import ScopusApyJson as saj
-    from ScopusApyJson.main import build_scopus_df_from_api    
-    
+# Standard library imports
+from argparse import ArgumentParser, Namespace
+from pathlib  import Path
+
+# Local library imports
+from ScopusApyJson.main import build_scopus_df_from_api
+
+def cli_doi():
     parser = ArgumentParser()
     parser.usage = '''Usage cli_doi -d <doi1 doi2 ...>  -o <results folder path>
     1- Get the json data through scopus api request for each DOI of a list of DOIs. 
     2- Saves the results in a csv file in the folder <results folder path> (default: your homedir).
     '''
-    
     parser.add_argument('-d',
                         '--doi',
                         help='doi to parse',
@@ -25,18 +21,18 @@ def cli_doi():
                         required=True)
 
     parser.add_argument('-o', '--output',
-                        nargs='?', 
+                        nargs='?',
                         help='output path for the results')
-    
-    args : Namespace = parser.parse_args()
-    
+
+    args: Namespace = parser.parse_args()
+
     if args.output is None:
         out_path = Path.home()
         print(f'Default output directory : {out_path}')
     else:
         out_path = args.output
         print(f'Option and command-line argument given: "-o {out_path}"')
-    
+
     doi_list = args.doi
     api_scopus_df = build_scopus_df_from_api(doi_list, timeout = 20, verbose = True )
     output_file = out_path / Path('scopus_result.csv')
@@ -45,13 +41,10 @@ def cli_doi():
                          index = False,
                          sep = ',')
     print(f"The results have been saved in the file: {output_file}")
-    
 
-def cli_json():    
-    from argparse import ArgumentParser, Namespace
 
+def cli_json():
     parser = ArgumentParser()
     parser.add_argument('file', help = 'json file to parse', type = str)
     args : Namespace = parser.parse_args()
     print(args.file)
-    
