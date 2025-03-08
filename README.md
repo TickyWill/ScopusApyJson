@@ -33,6 +33,7 @@ else:
 - 1.1.1 updated args of build_scopus_df_from_api function
 - 1.1.2 Enhanced robusteness of code after pylint scan
 - 1.1.3 Updated release history
+- 1.1.4 Align release history on PyPi
 
 
 # Meta
