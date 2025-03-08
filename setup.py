@@ -15,7 +15,7 @@ with open(path.join(this_directory, 'requirements.txt'), encoding='utf-8') as f:
 
 # Setting the setup parameters
 setup(name = 'ScopusApyJson',
-      version = '1.1.2',
+      version = '1.1.3',
       description = 'Python modules for parsing the response to a Scopus API request',
       long_description = long_description,
       long_description_content_type = 'text/markdown',
