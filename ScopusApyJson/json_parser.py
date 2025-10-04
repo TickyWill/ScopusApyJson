@@ -280,7 +280,7 @@ def _parse_authors_affiliations(json_data, article_dic):
             if not authors_with_affiliations_dict[author]:
                 authors_with_affiliations_dict[author] = ""
             author_affiliations_list = authors_with_affiliations_dict[author]
-            authors_with_affiliations_list.append(f"{author},"
+            authors_with_affiliations_list.append(f"{author}, "
                                                   f"{', '.join(author_affiliations_list)}")
 
         article_dic['Authors with affiliations'] = '; '.join(authors_with_affiliations_list)
